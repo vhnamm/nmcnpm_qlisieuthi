@@ -17,8 +17,8 @@ public class QuanLy extends NguoiDung{
     public QuanLy() {
     }
 
-    public QuanLy(String hoTen, String tel, String address, LocalDate ngaySinh, String maQL, int userID) {
-        super(hoTen, tel, address, ngaySinh);
+    public QuanLy(String hoTen, String tel, String address, String gender ,LocalDate ngaySinh, String maQL, int userID) {
+        super(hoTen, tel, address, gender,ngaySinh);
         this.maQL = maQL;
         this.userID = userID;
     }

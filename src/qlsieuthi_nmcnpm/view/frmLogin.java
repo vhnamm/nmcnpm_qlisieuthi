@@ -127,6 +127,12 @@ public class frmLogin extends javax.swing.JFrame {
                 this.dispose();
                 
                 break;
+            case "nhanvien":
+                frmNhanVien frmNV = new frmNhanVien();
+                frmNV.setVisible(true);
+                this.dispose();
+                break;
+                
             default:
                 throw new AssertionError();
         }

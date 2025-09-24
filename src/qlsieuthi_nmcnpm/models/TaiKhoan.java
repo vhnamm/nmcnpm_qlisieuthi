@@ -16,11 +16,12 @@ public class TaiKhoan {
     
     private NguoiDung nguoiDung;
     
-    public TaiKhoan(String tenDangNhap, String matKhau, String quyen, boolean isActive) {
+    public TaiKhoan(String tenDangNhap, String matKhau, String quyen, boolean isActive, NguoiDung nguoiDung) {
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
         this.quyen = quyen;
         this.isActive = isActive;
+        this.nguoiDung = nguoiDung;
     }
 
     public TaiKhoan() {
@@ -60,6 +61,10 @@ public class TaiKhoan {
 
     public NguoiDung getNguoiDung() {
         return nguoiDung;
+    }
+
+    public void setNguoiDung(NguoiDung nguoiDung) {
+        this.nguoiDung = nguoiDung;
     }
     
     

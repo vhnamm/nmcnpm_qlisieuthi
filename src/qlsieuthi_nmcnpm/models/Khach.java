@@ -16,8 +16,8 @@ public class Khach extends NguoiDung{
     
     public Khach(){}
 
-    public Khach(String hoTen, String tel, String address, LocalDate ngaySinh) {
-        super(hoTen, tel, address, ngaySinh);
+    public Khach(String hoTen, String tel, String address, String gender ,LocalDate ngaySinh) {
+        super(hoTen, tel, address, gender ,ngaySinh);
         
     }
 

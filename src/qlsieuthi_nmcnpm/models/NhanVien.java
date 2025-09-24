@@ -1,29 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package qlsieuthi_nmcnpm.models;
 
 import java.time.LocalDate;
 
-/**
- *
- * @author ADMIN
- */
 public class NhanVien extends NguoiDung{
     private String maNV;
     private double salary;
     private int userID;
+    private int trangThai;
     
     public NhanVien() {
        
     }
 
-    public NhanVien(String hoTen, String tel, String address, LocalDate ngaySinh, String maNV, double salary, int userId) {
-        super(hoTen, tel, address, ngaySinh);
-        this.maNV = maNV;
+    public NhanVien(String hoTen, String tel, String address,String gender, LocalDate ngaySinh,double salary) {
+        super(hoTen, tel, address,gender ,ngaySinh);
+        
         this.salary = salary;
-        this.userID = userID;
+        
     }
 
     public String getMaNV() {
@@ -48,6 +42,14 @@ public class NhanVien extends NguoiDung{
 
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
     }
     
     

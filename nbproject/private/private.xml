@@ -3,10 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/NMCNPM_btl/nmcnpm_qlisieuthi/src/qlsieuthi_nmcnpm/view/frmLogin.java</file>
-            <file>file:/E:/NMCNPM_btl/nmcnpm_qlisieuthi/src/qlsieuthi_nmcnpm/view/frmQuanLy.java</file>
-            <file>file:/E:/NMCNPM_btl/nmcnpm_qlisieuthi/src/qlsieuthi_nmcnpm/view/frmNhanVien.java</file>
-            <file>file:/E:/NMCNPM_btl/nmcnpm_qlisieuthi/src/qlsieuthi_nmcnpm/ConnectUtil/ConnectDB.java</file>
+            <file>file:/D:/nam/study/Java/QLSieuThi_nmcnpm/src/qlsieuthi_nmcnpm/view/frmQuanLy.java</file>
+            <file>file:/D:/nam/study/Java/QLSieuThi_nmcnpm/src/qlsieuthi_nmcnpm/view/pnPhanCongCaLam.java</file>
+            <file>file:/D:/nam/study/Java/QLSieuThi_nmcnpm/src/qlsieuthi_nmcnpm/DAO/TaiKhoanDAO.java</file>
+            <file>file:/D:/nam/study/Java/QLSieuThi_nmcnpm/src/qlsieuthi_nmcnpm/models/NguoiDung.java</file>
+            <file>file:/D:/nam/study/Java/QLSieuThi_nmcnpm/src/qlsieuthi_nmcnpm/DAO/NhanVienDAO.java</file>
+            <file>file:/D:/nam/study/Java/QLSieuThi_nmcnpm/src/qlsieuthi_nmcnpm/view/pnQLNhanVien.java</file>
+            <file>file:/D:/nam/study/Java/QLSieuThi_nmcnpm/src/qlsieuthi_nmcnpm/DTO/NhanVienFullDTO.java</file>
+            <file>file:/D:/nam/study/Java/QLSieuThi_nmcnpm/src/qlsieuthi_nmcnpm/DAO/NguoiDungDAO.java</file>
+            <file>file:/D:/nam/study/Java/QLSieuThi_nmcnpm/src/qlsieuthi_nmcnpm/models/NhanVien.java</file>
+            <file>file:/D:/nam/study/Java/QLSieuThi_nmcnpm/src/qlsieuthi_nmcnpm/models/TaiKhoan.java</file>
         </group>
     </open-files>
 </project-private>

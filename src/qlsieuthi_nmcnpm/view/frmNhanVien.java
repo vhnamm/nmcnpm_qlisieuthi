@@ -8,6 +8,8 @@ package qlsieuthi_nmcnpm.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -29,10 +31,37 @@ public class frmNhanVien extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         sidebarTab = new ArrayList<>();
         sidebarTab.add(btnChoXN); sidebarTab.add(btnBanHang);
+        initMouseEvt();
     }
 
     public void initMouseEvt(){
-        
+        for(JButton btn : sidebarTab){
+            btn.addMouseListener(new MouseAdapter(){
+                @Override
+                public void mouseEntered(MouseEvent e){
+                    if( isActive == null || !btn.getText().equals(isActive)){
+                        btn.setBackground(hoverBtn);
+                    }
+                }
+                
+                @Override
+                public void mouseExited(MouseEvent e){
+                    if(isActive == null || !btn.getText().equals(isActive)){
+                        btn.setBackground(inactiveBtn);
+                    }
+                }
+            });
+        }
+    }
+    
+    public void resetColor(){
+        for(JButton btn : sidebarTab){
+            if(btn.getText().equals(isActive))
+            {
+                btn.setBackground(inactiveBtn);
+                return;
+            }
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -66,10 +95,21 @@ public class frmNhanVien extends javax.swing.JFrame {
         btnChoXN.setForeground(new java.awt.Color(255, 255, 255));
         btnChoXN.setText("Đơn chờ xác nhận");
         btnChoXN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnChoXN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChoXNActionPerformed(evt);
+            }
+        });
 
         btnBanHang.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnBanHang.setForeground(new java.awt.Color(255, 255, 255));
         btnBanHang.setText("Bán Hàng");
+        btnBanHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBanHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBanHangActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -122,6 +162,18 @@ public class frmNhanVien extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnChoXNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoXNActionPerformed
+        resetColor();
+        btnChoXN.setBackground(activeBtn);
+        this.isActive = btnChoXN.getText();
+    }//GEN-LAST:event_btnChoXNActionPerformed
+
+    private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
+        resetColor();
+        btnBanHang.setBackground(activeBtn);
+        this.isActive = btnBanHang.getText();
+    }//GEN-LAST:event_btnBanHangActionPerformed
 
     /**
      * @param args the command line arguments

@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.*;
 
 
@@ -18,15 +19,21 @@ public class frmQuanLy extends javax.swing.JFrame {
     private final Color inactiveBtn = new Color(61, 74, 89);
     private final  Color activeBtn = new Color(56, 201, 187);
     private String isActive ;
-            
+    private CardLayout cardLayout;
+    
+    
     public frmQuanLy() {
         super("Quản lý cửa hàng tiện lợi NUKE");
         initComponents();
-        
         this.setLocationRelativeTo(null);
+      
         sidebarTab = new ArrayList<>();
         sidebarTab.add(btnQLNV); sidebarTab.add(btnQLSP); sidebarTab.add(btnQLNhap); sidebarTab.add(btnQLNCC); sidebarTab.add(btnThongKe); sidebarTab.add(btnPhanQuyen);
         initMouseEve();
+        
+        cardLayout = new CardLayout();
+        pnMain.setLayout(cardLayout);
+        pnMain.add(new pnGreet(), "pnGreet"); pnMain.add(new pnQLNhanVien(), "qlnv");
     }
     
     public void resetColor(){
@@ -212,24 +219,14 @@ public class frmQuanLy extends javax.swing.JFrame {
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
 
         pnMain.setPreferredSize(new java.awt.Dimension(1194, 746));
-
-        javax.swing.GroupLayout pnMainLayout = new javax.swing.GroupLayout(pnMain);
-        pnMain.setLayout(pnMainLayout);
-        pnMainLayout.setHorizontalGroup(
-            pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 767, Short.MAX_VALUE)
-        );
-        pnMainLayout.setVerticalGroup(
-            pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 708, Short.MAX_VALUE)
-        );
-
+        pnMain.setLayout(null);
         getContentPane().add(pnMain, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnQLNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNVActionPerformed
+        cardLayout.show(pnMain, "qlnv");
         resetColor();
         btnQLNV.setBackground(activeBtn);
         isActive = btnQLNV.getText();
@@ -294,6 +291,7 @@ public class frmQuanLy extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new frmQuanLy().setVisible(true);
+                Locale.setDefault(Locale.US);
             }
         });
     }
