@@ -77,6 +77,7 @@ public class frmNhanVien extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1394, 746));
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new Color(61, 74, 89));
         jPanel1.setPreferredSize(new java.awt.Dimension(200, 746));
@@ -148,14 +149,14 @@ public class frmNhanVien extends javax.swing.JFrame {
             .addGroup(pnMainLayout.createSequentialGroup()
                 .addGap(383, 383, 383)
                 .addComponent(jLabel1)
-                .addContainerGap(657, Short.MAX_VALUE))
+                .addContainerGap(632, Short.MAX_VALUE))
         );
         pnMainLayout.setVerticalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnMainLayout.createSequentialGroup()
                 .addGap(257, 257, 257)
                 .addComponent(jLabel1)
-                .addContainerGap(493, Short.MAX_VALUE))
+                .addContainerGap(491, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnMain, java.awt.BorderLayout.CENTER);
