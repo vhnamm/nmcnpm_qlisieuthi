@@ -150,6 +150,67 @@ public class NhanVienDAO {
             ConnectDB.close(conn);
             pre.close();
         } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
+    
+    public List<NhanVien> getAllNhanVien(){
+        List<NhanVien> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = ConnectDB.getInstance();
+            String sql = "SELECT nv.maNV, nv.trangThai,nd.hoTen, nd.tel "
+                    + "FROM employees nv "
+                    + "INNER JOIN users nd "
+                    + "ON nv.userID = nd.ID "
+                    + "WHERE nv.trangThai <> 0";
+            
+            pre = conn.prepareStatement(sql);
+            rs = pre.executeQuery();
+            
+            while(rs.next()){
+                NhanVien nv = new NhanVien();
+                nv.setMaNV(rs.getString("maNv"));
+                nv.setHoTen(rs.getString("hoTen"));
+                nv.setTrangThai(rs.getInt("trangThai"));
+                nv.setTel(rs.getString("tel"));
+                
+                list.add(nv);
+            }
+            ConnectDB.close(conn);
+            pre.close();
+            rs.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    public int getIdNhanVien(String maNV){
+        Connection conn = null;
+        PreparedStatement pre = null;
+        int id = -1;
+        try {
+            conn = ConnectDB.getInstance();
+            String sql  = "SELECT ID FROM employees WHERE maNV = ?";
+            
+            pre = conn.prepareStatement(sql);          
+            pre.setString(1, maNV);
+            
+            ResultSet rs = pre.executeQuery();
+            if(rs.next()){
+                id = rs.getInt("ID");
+            }
+            ConnectDB.close(conn);
+            pre.close();
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 }

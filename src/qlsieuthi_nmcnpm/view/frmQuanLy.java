@@ -33,7 +33,7 @@ public class frmQuanLy extends javax.swing.JFrame {
         
         cardLayout = new CardLayout();
         pnMain.setLayout(cardLayout);
-        pnMain.add(new pnGreet(), "pnGreet"); pnMain.add(new pnQLNhanVien(), "qlnv");
+        pnMain.add(new pnGreet(), "pnGreet"); pnMain.add(new pnQLNhanVien(), "qlnv"); pnMain.add(new pnProduct(), "qlsp") ; pnMain.add(new pnSupplier(), "qlncc");
     }
     
     public void resetColor(){
@@ -233,18 +233,22 @@ public class frmQuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQLNVActionPerformed
 
     private void btnQLSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLSPActionPerformed
+        cardLayout.show(pnMain, "qlsp");
         resetColor();
         btnQLSP.setBackground(activeBtn);
         isActive = btnQLSP.getText();
     }//GEN-LAST:event_btnQLSPActionPerformed
 
     private void btnQLNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNhapActionPerformed
+        
         resetColor();
         btnQLNhap.setBackground(activeBtn);
         isActive = btnQLNhap.getText();
     }//GEN-LAST:event_btnQLNhapActionPerformed
 
     private void btnQLNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNCCActionPerformed
+        ((pnSupplier)pnMain.getComponent(3)).reloadData();
+        cardLayout.show(pnMain, "qlncc");
         resetColor();
         btnQLNCC.setBackground(activeBtn);
         isActive = btnQLNCC.getText();

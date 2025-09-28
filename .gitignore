@@ -1,0 +1,20 @@
+# Bỏ qua file build tự sinh
+/build/
+ /dist/
+
+# Bỏ qua cấu hình riêng của máy bạn (JDK path, user prefs)
+nbproject/private/
+
+# Bỏ file log, cache tạm
+*.log
+*.bak
+
+# Bỏ các file IDE khác (VSCode, IntelliJ nếu mở)
+.vscode/
+.idea/
+*.iml
+
+# Bỏ các file hệ thống
+.DS_Store
+Thumbs.db
+
