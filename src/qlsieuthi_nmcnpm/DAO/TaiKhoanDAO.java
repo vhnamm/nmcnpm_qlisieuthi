@@ -6,12 +6,14 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import qlsieuthi_nmcnpm.ConnectUtil.ConnectDB;
+import qlsieuthi_nmcnpm.models.NguoiDung;
 
 public class TaiKhoanDAO {
     public TaiKhoan getAccountByTk(String username, String password){
         TaiKhoan tk = null;
         Connection conn = null;
         PreparedStatement pre = null;
+        ResultSet rs = null;
         try {
             conn = ConnectDB.getInstance();
             String sql = "SELECT * FROM accounts WHERE tenDangNhap = ? AND matKhau = ?";
@@ -20,11 +22,25 @@ public class TaiKhoanDAO {
             pre.setString(1, username);
             pre.setString(2, password);
             
-            ResultSet rs = pre.executeQuery();
+            rs = pre.executeQuery();
             if(rs.next()){
                 tk = new TaiKhoan();
                 tk.setQuyen(rs.getString("quyen"));
+                
                 tk.setIsActive(rs.getBoolean("isActive"));
+                int userID = rs.getInt("userID");
+                
+                //get them user
+                sql = "SELECT ID, hoTen FROM users WHERE ID = ?";
+                pre = conn.prepareStatement(sql);
+                pre.setInt(1, userID);
+                rs = pre.executeQuery();
+                if(rs.next()){
+                    NguoiDung nd = new NguoiDung();
+                    nd.setHoTen(rs.getString("hoTen"));
+                    nd.setUserID(rs.getInt("ID"));
+                    tk.setNguoiDung(nd);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -33,6 +49,7 @@ public class TaiKhoanDAO {
             ConnectDB.close(conn);
             try {
                 pre.close();
+                rs.close();
             } catch (SQLException ex) {
                 Logger.getLogger(TaiKhoanDAO.class.getName()).log(Level.SEVERE, null, ex);
             }

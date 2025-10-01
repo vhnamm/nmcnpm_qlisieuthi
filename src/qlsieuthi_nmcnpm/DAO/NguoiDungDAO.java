@@ -4,6 +4,7 @@ package qlsieuthi_nmcnpm.DAO;
 import qlsieuthi_nmcnpm.models.NguoiDung;
 import java.sql.*;
 import qlsieuthi_nmcnpm.ConnectUtil.ConnectDB;
+import qlsieuthi_nmcnpm.models.TaiKhoan;
 /**
  *
  * @author ADMIN
@@ -66,4 +67,5 @@ public class NguoiDungDAO {
         } catch (SQLException e) {
         }
     }
+
 }

@@ -23,10 +23,9 @@ public class Product {
     private int state;
     private byte[] img;
 
-    public Product(int id, String name, String codes, String unit, String cate, String desc, int storeQuantity, double importAvrg, double sellPrice, int state, byte[] img) {
-        this.id = id;
+    public Product(String name, String unit, String cate, String desc, int storeQuantity, double importAvrg, double sellPrice, int state, byte[] img) {
+        
         this.name = name;
-        this.codes = codes;
         this.unit = unit;
         this.cate = cate;
         this.desc = desc;

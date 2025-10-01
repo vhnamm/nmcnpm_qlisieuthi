@@ -1,6 +1,6 @@
 # Bỏ qua file build tự sinh
 /build/
- /dist/
+/dist/
 
 # Bỏ qua cấu hình riêng của máy bạn (JDK path, user prefs)
 nbproject/private/

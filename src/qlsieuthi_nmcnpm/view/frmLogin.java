@@ -6,6 +6,7 @@ package qlsieuthi_nmcnpm.view;
 
 import javax.swing.JOptionPane;
 import qlsieuthi_nmcnpm.DAO.TaiKhoanDAO;
+import qlsieuthi_nmcnpm.helper.Session;
 import qlsieuthi_nmcnpm.models.TaiKhoan;
 
 /**
@@ -119,17 +120,21 @@ public class frmLogin extends javax.swing.JFrame {
             return;
         }
         
+        Session.setCurrentTk(tk);
+        
         System.out.println(tk.getMatKhau());
         switch (tk.getQuyen()) {
             case "quanly":
                 frmQuanLy frmQL = new frmQuanLy();
                 frmQL.setVisible(true);
+                JOptionPane.showMessageDialog(frmQL, "Đăng nhập thành công!", "Hệ thống",  JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
                 
                 break;
             case "nhanvien":
                 frmNhanVien frmNV = new frmNhanVien();
                 frmNV.setVisible(true);
+                JOptionPane.showMessageDialog(frmNV, "Đăng nhập thành công!", "Hệ thống", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
                 break;
                 

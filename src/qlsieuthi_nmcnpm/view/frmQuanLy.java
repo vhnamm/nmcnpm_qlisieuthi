@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.*;
+import qlsieuthi_nmcnpm.helper.Session;
 
 
 public class frmQuanLy extends javax.swing.JFrame {
@@ -34,6 +35,7 @@ public class frmQuanLy extends javax.swing.JFrame {
         cardLayout = new CardLayout();
         pnMain.setLayout(cardLayout);
         pnMain.add(new pnGreet(), "pnGreet"); pnMain.add(new pnQLNhanVien(), "qlnv"); pnMain.add(new pnProduct(), "qlsp") ; pnMain.add(new pnSupplier(), "qlncc");
+        lbHello.setText("Xin chào "  + Session.getCurrentTk().getNguoiDung().getHoTen() + "!");
     }
     
     public void resetColor(){
@@ -77,9 +79,11 @@ public class frmQuanLy extends javax.swing.JFrame {
         btnQLNCC = new javax.swing.JButton();
         btnThongKe = new javax.swing.JButton();
         btnPhanQuyen = new javax.swing.JButton();
+        lbHello = new javax.swing.JLabel();
         pnMain = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1394, 840));
 
         jPanel1.setBackground(new Color(61, 74, 89));
         jPanel1.setPreferredSize(new java.awt.Dimension(200, 736));
@@ -166,6 +170,10 @@ public class frmQuanLy extends javax.swing.JFrame {
             }
         });
 
+        lbHello.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbHello.setForeground(new java.awt.Color(255, 255, 255));
+        lbHello.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -177,12 +185,18 @@ public class frmQuanLy extends javax.swing.JFrame {
             .addComponent(btnQLNCC, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
             .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnPhanQuyen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(lbHello)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbHello)
+                .addGap(18, 18, 18)
                 .addComponent(btnQLNV, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnQLSP, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,7 +208,7 @@ public class frmQuanLy extends javax.swing.JFrame {
                 .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(btnPhanQuyen, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 130, Short.MAX_VALUE))
+                .addGap(0, 215, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new Color(61, 74, 89));
@@ -233,6 +247,7 @@ public class frmQuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQLNVActionPerformed
 
     private void btnQLSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLSPActionPerformed
+        ((pnProduct) pnMain.getComponent(2)).reloadData();
         cardLayout.show(pnMain, "qlsp");
         resetColor();
         btnQLSP.setBackground(activeBtn);
@@ -309,6 +324,7 @@ public class frmQuanLy extends javax.swing.JFrame {
     private javax.swing.JButton btnThongKe;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lbHello;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JPanel pnMain;
     // End of variables declaration//GEN-END:variables

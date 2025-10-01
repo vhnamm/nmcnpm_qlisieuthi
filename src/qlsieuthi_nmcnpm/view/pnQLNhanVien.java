@@ -150,6 +150,7 @@ public class pnQLNhanVien extends javax.swing.JPanel {
             }
         });
         tblNhanVien.setRowHeight(30);
+        tblNhanVien.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tblNhanVien);
 
         jPanel1.add(jScrollPane1);
