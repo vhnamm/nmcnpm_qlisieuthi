@@ -44,7 +44,7 @@ public class pnProduct extends javax.swing.JPanel {
     private void customizeTableHeader() {
         JTableHeader header = tbProducts.getTableHeader();
         header.setOpaque(false);
-
+       
         // Tạo custom renderer cho header
         header.setDefaultRenderer(new DefaultTableCellRenderer() {
             @Override
@@ -101,8 +101,13 @@ public class pnProduct extends javax.swing.JPanel {
         txtFind = new javax.swing.JTextField();
         btnFind = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProducts = new javax.swing.JTable();
+        txtTest = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         dialogProduct.setMinimumSize(new java.awt.Dimension(1187, 719));
         dialogProduct.setModal(true);
@@ -132,7 +137,7 @@ public class pnProduct extends javax.swing.JPanel {
         );
 
         dialogProduct.getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 1146, 67);
+        jPanel2.setBounds(0, 0, 1146, 0);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new Color(61, 74, 89)
@@ -236,7 +241,7 @@ public class pnProduct extends javax.swing.JPanel {
         );
         jLabel11.setText("Mô tả sản phẩm");
         dialogProduct.getContentPane().add(jLabel11);
-        jLabel11.setBounds(180, 500, 107, 20);
+        jLabel11.setBounds(180, 500, 108, 20);
 
         txtDesc.setColumns(20);
         txtDesc.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -344,6 +349,10 @@ public class pnProduct extends javax.swing.JPanel {
         jPanel1.add(jComboBox1);
         jComboBox1.setBounds(610, 10, 130, 40);
 
+        jLabel1.setText("hello");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(490, 30, 100, 16);
+
         tbProducts.setAutoCreateRowSorter(true);
         tbProducts.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tbProducts.setModel(new javax.swing.table.DefaultTableModel(
@@ -373,6 +382,14 @@ public class pnProduct extends javax.swing.JPanel {
         tbProducts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbProducts);
 
+        txtTest.setText("GGGGG");
+
+        jButton1.setText("jButton1");
+
+        jButton2.setText("jButton2");
+
+        jButton3.setText("jButton3");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -383,13 +400,29 @@ public class pnProduct extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1192, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(501, 501, 501)
+                .addComponent(txtTest)
+                .addGap(136, 136, 136)
+                .addComponent(jButton1)
+                .addGap(74, 74, 74)
+                .addComponent(jButton2)
+                .addGap(76, 76, 76)
+                .addComponent(jButton3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTest)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -406,7 +439,7 @@ public class pnProduct extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnChoseImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoseImgActionPerformed
-        JFileChooser fileChooser = new JFileChooser("D:\\nam\\study\\Java\\QLSieuThi_nmcnpm\\images");
+        JFileChooser fileChooser = new JFileChooser("E:\\NMCNPM_btl\\nmcnpm_qlisieuthi\\images");
         FileNameExtensionFilter imgFilter = new FileNameExtensionFilter(".jpg, .png", "jpg", "png");
         fileChooser.setFileFilter(imgFilter);
         fileChooser.setMultiSelectionEnabled(false);
@@ -652,7 +685,11 @@ public class pnProduct extends javax.swing.JPanel {
     private javax.swing.JButton btnModify;
     private javax.swing.JButton btnSave;
     private javax.swing.JDialog dialogProduct;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -682,6 +719,7 @@ public class pnProduct extends javax.swing.JPanel {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtQuan;
+    private javax.swing.JLabel txtTest;
     private javax.swing.JTextField txtUnit;
     // End of variables declaration//GEN-END:variables
 }

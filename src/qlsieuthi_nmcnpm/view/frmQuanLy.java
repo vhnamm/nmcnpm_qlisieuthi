@@ -34,7 +34,7 @@ public class frmQuanLy extends javax.swing.JFrame {
         
         cardLayout = new CardLayout();
         pnMain.setLayout(cardLayout);
-        pnMain.add(new pnGreet(), "pnGreet"); pnMain.add(new pnQLNhanVien(), "qlnv"); pnMain.add(new pnProduct(), "qlsp") ; pnMain.add(new pnSupplier(), "qlncc");
+        addPanel();
         lbHello.setText("Xin chào "  + Session.getCurrentTk().getNguoiDung().getHoTen() + "!");
     }
     
@@ -240,6 +240,7 @@ public class frmQuanLy extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnQLNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNVActionPerformed
+
         cardLayout.show(pnMain, "qlnv");
         resetColor();
         btnQLNV.setBackground(activeBtn);
@@ -247,6 +248,7 @@ public class frmQuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQLNVActionPerformed
 
     private void btnQLSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLSPActionPerformed
+
         ((pnProduct) pnMain.getComponent(2)).reloadData();
         cardLayout.show(pnMain, "qlsp");
         resetColor();
@@ -255,14 +257,16 @@ public class frmQuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQLSPActionPerformed
 
     private void btnQLNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNhapActionPerformed
-        
+
+        cardLayout.show(pnMain, "qlnhap");
         resetColor();
         btnQLNhap.setBackground(activeBtn);
         isActive = btnQLNhap.getText();
     }//GEN-LAST:event_btnQLNhapActionPerformed
 
     private void btnQLNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNCCActionPerformed
-        ((pnSupplier)pnMain.getComponent(3)).reloadData();
+
+        ((pnSupplier)pnMain.getComponent(4)).reloadData();
         cardLayout.show(pnMain, "qlncc");
         resetColor();
         btnQLNCC.setBackground(activeBtn);
@@ -281,7 +285,13 @@ public class frmQuanLy extends javax.swing.JFrame {
         isActive = btnPhanQuyen.getText();
     }//GEN-LAST:event_btnPhanQuyenActionPerformed
 
-
+    public void addPanel(){
+        pnMain.add(new pnGreet(), "pnGreet"); 
+        pnMain.add(new pnQLNhanVien(), "qlnv"); 
+        pnMain.add(new pnProduct(), "qlsp") ;
+        pnMain.add(new pnImport(), "qlnhap") ;
+        pnMain.add(new pnSupplier(), "qlncc");
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
