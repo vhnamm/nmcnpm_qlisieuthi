@@ -6,8 +6,10 @@ package qlsieuthi_nmcnpm;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import qlsieuthi_nmcnpm.models.Khach;
 import qlsieuthi_nmcnpm.models.NguoiDung;
+import qlsieuthi_nmcnpm.view.frmLogin;
 
 /**
  *
@@ -19,7 +21,10 @@ public class QLSieuThi_nmcnpm {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       
+       Locale.setDefault(Locale.US);
+        frmLogin login = new frmLogin();
+        login.setVisible(true);
+        login.setLocationRelativeTo(null);
     }
     
 }

@@ -158,4 +158,41 @@ public class ProductDAO {
             e.printStackTrace();
         }
     }
+    
+    public void updateImportedProduct(int productId, int quan,double importPrice){
+        Connection conn;
+        PreparedStatement pre;
+        ResultSet rs;
+        
+        
+        try {
+            conn = ConnectDB.getInstance();
+            String sql = "SELECT storeQuantity, importAvrg FROM products WHERE ID = ?";
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, productId);
+            rs = pre.executeQuery();
+            if(rs.next()){
+                double oldImportAvrg = rs.getDouble("importAvrg");
+                int oldQuan = rs.getInt("storeQuantity");
+                
+                double newImportAvrg = ((importPrice * quan) + (oldImportAvrg * oldQuan)) / (oldQuan + quan);
+                sql = "UPDATE products SET storeQuantity = ?, importAvrg = ? WHERE ID = ?";
+                pre = conn.prepareStatement(sql);
+                
+                pre.setInt(1, quan + oldQuan);
+                pre.setDouble(2, newImportAvrg);
+                pre.setInt(3, productId);
+                
+                pre.executeUpdate();
+                
+               
+            }
+            ConnectDB.close(conn);
+            pre.close();
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+    }
 }

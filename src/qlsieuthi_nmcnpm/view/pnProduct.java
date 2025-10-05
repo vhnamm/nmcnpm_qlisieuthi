@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import qlsieuthi_nmcnpm.DAO.ProductDAO;
 import qlsieuthi_nmcnpm.helper.ImageConvert;
+import qlsieuthi_nmcnpm.helper.ThousandSeperator;
 import qlsieuthi_nmcnpm.models.Product;
 
 public class pnProduct extends javax.swing.JPanel {
@@ -101,13 +102,8 @@ public class pnProduct extends javax.swing.JPanel {
         txtFind = new javax.swing.JTextField();
         btnFind = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProducts = new javax.swing.JTable();
-        txtTest = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         dialogProduct.setMinimumSize(new java.awt.Dimension(1187, 719));
         dialogProduct.setModal(true);
@@ -124,20 +120,20 @@ public class pnProduct extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(463, 463, 463)
+                .addGap(524, 524, 524)
                 .addComponent(lbTitle)
-                .addContainerGap(571, Short.MAX_VALUE))
+                .addContainerGap(564, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(14, 14, 14)
                 .addComponent(lbTitle)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         dialogProduct.getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 1146, 0);
+        jPanel2.setBounds(0, 0, 1200, 67);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new Color(61, 74, 89)
@@ -241,7 +237,7 @@ public class pnProduct extends javax.swing.JPanel {
         );
         jLabel11.setText("Mô tả sản phẩm");
         dialogProduct.getContentPane().add(jLabel11);
-        jLabel11.setBounds(180, 500, 108, 20);
+        jLabel11.setBounds(180, 500, 107, 20);
 
         txtDesc.setColumns(20);
         txtDesc.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -349,10 +345,6 @@ public class pnProduct extends javax.swing.JPanel {
         jPanel1.add(jComboBox1);
         jComboBox1.setBounds(610, 10, 130, 40);
 
-        jLabel1.setText("hello");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(490, 30, 100, 16);
-
         tbProducts.setAutoCreateRowSorter(true);
         tbProducts.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tbProducts.setModel(new javax.swing.table.DefaultTableModel(
@@ -382,14 +374,6 @@ public class pnProduct extends javax.swing.JPanel {
         tbProducts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tbProducts);
 
-        txtTest.setText("GGGGG");
-
-        jButton1.setText("jButton1");
-
-        jButton2.setText("jButton2");
-
-        jButton3.setText("jButton3");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -400,30 +384,14 @@ public class pnProduct extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1192, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(501, 501, 501)
-                .addComponent(txtTest)
-                .addGap(136, 136, 136)
-                .addComponent(jButton1)
-                .addGap(74, 74, 74)
-                .addComponent(jButton2)
-                .addGap(76, 76, 76)
-                .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTest)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -500,11 +468,13 @@ public class pnProduct extends javax.swing.JPanel {
             prod.setCodes(codes);
             ProductDAO prodDAO = new ProductDAO();
             prodDAO.updateProduct(prod);
+            
+            //cap nhat lai view
             tbProducts.setValueAt(name, rowSelected, 1);
             tbProducts.setValueAt(desc, rowSelected, 2);
             tbProducts.setValueAt(cate, rowSelected, 3);
             tbProducts.setValueAt(unit, rowSelected, 4);
-            tbProducts.setValueAt(String.format("%.0f", sellPrice), rowSelected, 7);
+            tbProducts.setValueAt(sellPrice, rowSelected, 7);
             String trangThai = state == 2 ? "Đang kinh doanh": "Đã ngừng bán";
             
             tbProducts.setValueAt(trangThai, rowSelected, 8);
@@ -574,7 +544,7 @@ public class pnProduct extends javax.swing.JPanel {
             String unit = tbProducts.getValueAt(row, 4).toString();
             String quan = tbProducts.getValueAt(row, 5).toString();
             String importPrice = tbProducts.getValueAt(row, 6).toString();
-            String sell = tbProducts.getValueAt(row, 7).toString();
+            double sell = Double.parseDouble(tbProducts.getValueAt(row, 7).toString()) ;
             String state = tbProducts.getValueAt(row, 8).toString();
             
             lbTitle.setText("Sửa sản phẩm");
@@ -583,11 +553,13 @@ public class pnProduct extends javax.swing.JPanel {
             txtDesc.setText(des);
             txtCate.setText(cate);
             txtImportAvrg.setText(importPrice);
-            txtPrice.setText(sell);
+            txtPrice.setText(String.format("%.0f", sell));
             txtQuan.setText(quan);
             txtUnit.setText(unit);
             radioOn.setEnabled(true);
             radioOff.setEnabled(true);
+            
+            
             if (state.equals("Đang kinh doanh")) {
                 radioOn.setSelected(true);
             }else if(state.equals("Đã ngừng bán")){
@@ -652,14 +624,17 @@ public class pnProduct extends javax.swing.JPanel {
                 prod.getCate(),
                 prod.getUnit(),
                 prod.getStoreQuantity(),
-                String.format("%.0f", prod.getImportAvrg()),
-                String.format("%.0f", prod.getSellPrice()),
+                prod.getImportAvrg(),
+                prod.getSellPrice(),
                 state
             });
             
             map.put( prod.getCodes(), prod.getImg());
         }
+        
         tbProducts.setModel(tbModel);
+        tbProducts.getColumnModel().getColumn(7).setCellRenderer(new ThousandSeperator());
+        tbProducts.getColumnModel().getColumn(6).setCellRenderer(new ThousandSeperator());
     }
     public void resetForm(){
         txtName.setText("");
@@ -685,11 +660,7 @@ public class pnProduct extends javax.swing.JPanel {
     private javax.swing.JButton btnModify;
     private javax.swing.JButton btnSave;
     private javax.swing.JDialog dialogProduct;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -719,7 +690,6 @@ public class pnProduct extends javax.swing.JPanel {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtQuan;
-    private javax.swing.JLabel txtTest;
     private javax.swing.JTextField txtUnit;
     // End of variables declaration//GEN-END:variables
 }

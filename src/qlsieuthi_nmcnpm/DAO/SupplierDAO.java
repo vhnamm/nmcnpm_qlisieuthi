@@ -29,6 +29,7 @@ public class SupplierDAO {
             
             while(rs.next()){
                 Supplier supp = new Supplier(rs.getString("codes"), rs.getString("supplierName"), rs.getString("tel"), rs.getString("address"));
+                supp.setId(rs.getInt("ID"));
                 list.add(supp);
             }
             ConnectDB.close(conn);

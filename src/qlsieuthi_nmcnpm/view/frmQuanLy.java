@@ -83,7 +83,7 @@ public class frmQuanLy extends javax.swing.JFrame {
         pnMain = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1394, 840));
+        setPreferredSize(new java.awt.Dimension(1420, 860));
 
         jPanel1.setBackground(new Color(61, 74, 89));
         jPanel1.setPreferredSize(new java.awt.Dimension(200, 736));
@@ -257,7 +257,11 @@ public class frmQuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQLSPActionPerformed
 
     private void btnQLNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNhapActionPerformed
-
+        ((pnImport) pnMain.getComponent(3)).loadProductList();
+        
+        ((pnImport) pnMain.getComponent(3)).initDateAndSupplier();
+        ((pnImport) pnMain.getComponent(3)).initReceiptInfo();
+        
         cardLayout.show(pnMain, "qlnhap");
         resetColor();
         btnQLNhap.setBackground(activeBtn);
@@ -320,7 +324,7 @@ public class frmQuanLy extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new frmQuanLy().setVisible(true);
-                Locale.setDefault(Locale.US);
+                
             }
         });
     }

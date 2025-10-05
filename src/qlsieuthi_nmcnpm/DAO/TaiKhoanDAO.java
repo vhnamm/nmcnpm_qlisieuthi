@@ -28,6 +28,7 @@ public class TaiKhoanDAO {
                 tk.setQuyen(rs.getString("quyen"));
                 
                 tk.setIsActive(rs.getBoolean("isActive"));
+                tk.setTenDangNhap(rs.getString("tenDangNhap"));
                 int userID = rs.getInt("userID");
                 
                 //get them user
