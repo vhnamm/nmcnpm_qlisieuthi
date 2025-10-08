@@ -43,4 +43,16 @@ public class ImageConvert {
         }
         return byteArr;
     }
+    
+    public static ImageIcon getByteToImageIcon(byte[] imgData, int width, int height){
+        ImageIcon imgIcon = null;
+        
+        if(imgData == null || imgData.length == 0){
+            return null;
+        }
+        imgIcon  = new ImageIcon(imgData);
+        Image scaledImg = imgIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        
+        return new ImageIcon(scaledImg);
+    }
 }

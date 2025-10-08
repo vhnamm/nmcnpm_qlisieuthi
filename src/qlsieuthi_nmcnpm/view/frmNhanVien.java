@@ -5,6 +5,7 @@
  */
 package qlsieuthi_nmcnpm.view;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import qlsieuthi_nmcnpm.helper.Session;
 
 /**
  *
@@ -25,6 +27,7 @@ public class frmNhanVien extends javax.swing.JFrame {
     private final Color inactiveBtn = new Color(61, 74, 89);
     private final  Color activeBtn = new Color(56, 201, 187);
     private String isActive ;
+    private CardLayout cardLayout;
     
     public frmNhanVien() {
         initComponents();
@@ -32,6 +35,12 @@ public class frmNhanVien extends javax.swing.JFrame {
         sidebarTab = new ArrayList<>();
         sidebarTab.add(btnChoXN); sidebarTab.add(btnBanHang);
         initMouseEvt();
+        
+        cardLayout = new CardLayout();
+        pnMain.setLayout(cardLayout);
+        addPanel();
+        
+        lbHello.setText("Nhân viên: " + Session.getCurrentTk().getNguoiDung().getHoTen());
     }
 
     public void initMouseEvt(){
@@ -72,11 +81,11 @@ public class frmNhanVien extends javax.swing.JFrame {
         lblLogo = new javax.swing.JLabel();
         btnChoXN = new javax.swing.JButton();
         btnBanHang = new javax.swing.JButton();
+        lbHello = new javax.swing.JLabel();
         pnMain = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1394, 746));
+        setPreferredSize(new java.awt.Dimension(1500, 930));
 
         jPanel1.setBackground(new Color(61, 74, 89));
         jPanel1.setPreferredSize(new java.awt.Dimension(200, 746));
@@ -111,6 +120,10 @@ public class frmNhanVien extends javax.swing.JFrame {
             }
         });
 
+        lbHello.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbHello.setForeground(new java.awt.Color(255, 255, 255));
+        lbHello.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -118,16 +131,22 @@ public class frmNhanVien extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnChoXN, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
             .addComponent(btnBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbHello)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90)
+                .addGap(18, 18, 18)
+                .addComponent(lbHello)
+                .addGap(56, 56, 56)
                 .addComponent(btnChoXN, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(btnBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 398, Short.MAX_VALUE))
+                .addGap(0, 394, Short.MAX_VALUE))
         );
 
         btnChoXN.setBorderPainted(false);
@@ -139,23 +158,15 @@ public class frmNhanVien extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.LINE_START);
 
-        jLabel1.setText("DAY LA TRANG CHO NHAN VIEN");
-
         javax.swing.GroupLayout pnMainLayout = new javax.swing.GroupLayout(pnMain);
         pnMain.setLayout(pnMainLayout);
         pnMainLayout.setHorizontalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnMainLayout.createSequentialGroup()
-                .addGap(383, 383, 383)
-                .addComponent(jLabel1)
-                .addContainerGap(632, Short.MAX_VALUE))
+            .addGap(0, 1194, Short.MAX_VALUE)
         );
         pnMainLayout.setVerticalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnMainLayout.createSequentialGroup()
-                .addGap(257, 257, 257)
-                .addComponent(jLabel1)
-                .addContainerGap(491, Short.MAX_VALUE))
+            .addGap(0, 764, Short.MAX_VALUE)
         );
 
         getContentPane().add(pnMain, java.awt.BorderLayout.CENTER);
@@ -170,14 +181,19 @@ public class frmNhanVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChoXNActionPerformed
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
+        ((pnSell) pnMain.getComponent(1)).loadProductData();
+        ((pnSell) pnMain.getComponent(1)).initOrderCode();
+        cardLayout.show(pnMain, "pnSell");
         resetColor();
         btnBanHang.setBackground(activeBtn);
         this.isActive = btnBanHang.getText();
     }//GEN-LAST:event_btnBanHangActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    public  void addPanel(){
+        pnMain.add(new pnGreet(), "pnHello");
+        pnMain.add(new pnSell(), "pnSell");
+        
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -213,9 +229,9 @@ public class frmNhanVien extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBanHang;
     private javax.swing.JButton btnChoXN;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbHello;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JPanel pnMain;
     // End of variables declaration//GEN-END:variables

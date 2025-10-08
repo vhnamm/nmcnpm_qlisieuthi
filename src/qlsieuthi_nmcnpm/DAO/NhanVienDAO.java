@@ -213,4 +213,28 @@ public class NhanVienDAO {
         }
         return id;
     }
+    
+    public String getCodesNhanVien(int id){
+        Connection conn = null;
+        PreparedStatement pre = null;
+        String code = null;
+        try {
+            conn = ConnectDB.getInstance();
+            String sql  = "SELECT maNV FROM employees WHERE userID = ?";
+            
+            pre = conn.prepareStatement(sql);          
+            pre.setInt(1, id);
+            
+            ResultSet rs = pre.executeQuery();
+            if(rs.next()){
+                code = rs.getString("maNV");
+            }
+            ConnectDB.close(conn);
+            pre.close();
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return code;
+    }
 }
