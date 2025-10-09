@@ -14,6 +14,7 @@ import qlsieuthi_nmcnpm.DAO.CustomerDAO;
 import qlsieuthi_nmcnpm.DAO.NhanVienDAO;
 import qlsieuthi_nmcnpm.DAO.OrderDAO;
 import qlsieuthi_nmcnpm.DAO.ProductDAO;
+import qlsieuthi_nmcnpm.helper.ClockThread;
 import qlsieuthi_nmcnpm.helper.ImageConvert;
 import qlsieuthi_nmcnpm.helper.SeperatorConvert;
 import qlsieuthi_nmcnpm.helper.Session;
@@ -26,14 +27,38 @@ public class pnSell extends javax.swing.JPanel {
     private DefaultTableModel tbProductModel;
     private DefaultTableModel tbOrderModel;
     private double total = 0;
+    private ClockThread clockThread;
+    private Thread t;
     
     public pnSell() {
         initComponents();
         initNhanVienNgayTao();
         
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentShown(java.awt.event.ComponentEvent e){
+                initClockThread();
+            }
+            
+            @Override
+            public void componentHidden(java.awt.event.ComponentEvent e){
+                stopCurrentThread();
+            }
+        });
     }
-
-
+    
+    public void stopCurrentThread(){
+        if(clockThread != null){
+            clockThread.stopClockThread(t);
+        }
+    }
+    
+    public void initClockThread(){
+        clockThread = new ClockThread(lbTimeCreate);
+        t = new Thread(clockThread);
+        t.start();
+        
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -84,6 +109,7 @@ public class pnSell extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        lbTimeCreate = new javax.swing.JLabel();
         spinnerQty = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         btnAddToOrder = new javax.swing.JButton();
@@ -350,6 +376,9 @@ public class pnSell extends javax.swing.JPanel {
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel19.setText("đ");
 
+        lbTimeCreate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbTimeCreate.setText("jLabel22");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -359,15 +388,13 @@ public class pnSell extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
                             .addComponent(jLabel9)
                             .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCodes, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(dateNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dateNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(99, 99, 99))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,7 +457,16 @@ public class pnSell extends javax.swing.JPanel {
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING)))))))
-                        .addContainerGap(14, Short.MAX_VALUE))))
+                        .addContainerGap(14, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(127, 127, 127))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(lbTimeCreate)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -445,11 +481,13 @@ public class pnSell extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(dateNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(21, 21, 21)
+                .addComponent(lbTimeCreate)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -502,7 +540,7 @@ public class pnSell extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCreateInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(btnCancelInvoice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         spinnerQty.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -815,6 +853,7 @@ public class pnSell extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbSale;
+    private javax.swing.JLabel lbTimeCreate;
     private javax.swing.JLabel lbTotal;
     private javax.swing.JLabel lbTotalAfterSale;
     private javax.swing.JSpinner spinnerModifyQty;

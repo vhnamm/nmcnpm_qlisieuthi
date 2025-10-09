@@ -36,6 +36,9 @@ public class frmQuanLy extends javax.swing.JFrame {
         pnMain.setLayout(cardLayout);
         addPanel();
         lbHello.setText("Xin chào "  + Session.getCurrentTk().getNguoiDung().getHoTen() + "!");
+        
+        ImageIcon image = new ImageIcon("E:\\NMCNPM_btl\\nmcnpm_qlisieuthi\\images\\favicon.png");
+        this.setIconImage(image.getImage());
     }
     
     public void resetColor(){
