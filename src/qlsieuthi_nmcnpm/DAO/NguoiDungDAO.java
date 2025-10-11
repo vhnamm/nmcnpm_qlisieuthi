@@ -22,7 +22,12 @@ public class NguoiDungDAO {
             pre.setString(1, nd.getHoTen());
             pre.setString(2, nd.getTel());
             pre.setString(3, nd.getAddress());
-            pre.setDate(4, Date.valueOf(nd.getNgaySinh()));
+            if(nd.getNgaySinh() != null){
+                pre.setDate(4, Date.valueOf(nd.getNgaySinh()));
+            }else{
+                pre.setNull(4, java.sql.Types.DATE);
+            }
+            
             pre.setString(5, nd.getGender());
             
             pre.executeUpdate();
@@ -67,5 +72,34 @@ public class NguoiDungDAO {
         } catch (SQLException e) {
         }
     }
+    
+    public int checkTelExist(String tel){
+        Connection conn = null;
+        PreparedStatement pre;
+        ResultSet rs;
+        int id = -1;
+       
+        try {
+            conn = ConnectDB.getInstance();
+            String sql = "SELECT nd.tel, nd.ID "
+                    + "FROM users nd "
+                    + "WHERE nd.tel = ? "
+                    + "LIMIT 1";
 
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, tel);
+            rs = pre.executeQuery();
+            if(rs.next()){
+                id = rs.getInt("ID");
+            }
+            
+            ConnectDB.close(conn);
+            pre.close();
+            rs.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
 }

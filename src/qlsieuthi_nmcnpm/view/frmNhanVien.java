@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import qlsieuthi_nmcnpm.helper.Session;
 
 /**
@@ -82,6 +83,7 @@ public class frmNhanVien extends javax.swing.JFrame {
         btnChoXN = new javax.swing.JButton();
         btnBanHang = new javax.swing.JButton();
         lbHello = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
         pnMain = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -124,6 +126,14 @@ public class frmNhanVien extends javax.swing.JFrame {
         lbHello.setForeground(new java.awt.Color(255, 255, 255));
         lbHello.setText("jLabel1");
 
+        btnLogout.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnLogout.setText("Đăng xuất");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -135,6 +145,7 @@ public class frmNhanVien extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lbHello)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,7 +157,9 @@ public class frmNhanVien extends javax.swing.JFrame {
                 .addComponent(btnChoXN, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(btnBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 394, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 311, Short.MAX_VALUE)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
 
         btnChoXN.setBorderPainted(false);
@@ -175,6 +188,7 @@ public class frmNhanVien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnChoXNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoXNActionPerformed
+        cardLayout.show(pnMain, "pnPending");
         resetColor();
         btnChoXN.setBackground(activeBtn);
         this.isActive = btnChoXN.getText();
@@ -189,10 +203,20 @@ public class frmNhanVien extends javax.swing.JFrame {
         this.isActive = btnBanHang.getText();
     }//GEN-LAST:event_btnBanHangActionPerformed
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn đăng xuất?", "Hệ thống", JOptionPane.YES_NO_OPTION);
+        if(choice == JOptionPane.YES_OPTION){
+            ((pnSell) pnMain.getComponent(1)).stopCurrentThread();
+            this.setVisible(false);
+            frmLogin login = new frmLogin();
+            login.setVisible(true);
+        }
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
     public  void addPanel(){
         pnMain.add(new pnGreet(), "pnHello");
         pnMain.add(new pnSell(), "pnSell");
-        
+        pnMain.add(new pnPendingOrder(), "pnPending");
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -229,6 +253,7 @@ public class frmNhanVien extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBanHang;
     private javax.swing.JButton btnChoXN;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbHello;

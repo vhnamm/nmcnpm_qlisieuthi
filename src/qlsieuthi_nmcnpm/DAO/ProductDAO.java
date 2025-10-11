@@ -195,4 +195,38 @@ public class ProductDAO {
         }
         
     }
+    
+    public void updateSoldQty(int id, int soldQty){
+        Connection conn;
+        PreparedStatement pre;
+        ResultSet rs;
+        
+        try {
+            conn = ConnectDB.getInstance();
+            String sql = "SELECT storeQuantity FROM products WHERE ID = ?";
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, id);
+            rs = pre.executeQuery();
+            if(rs.next()){
+                
+                int storeQty = rs.getInt("storeQuantity");
+
+                sql = "UPDATE products SET storeQuantity = ? WHERE ID = ?";
+                pre = conn.prepareStatement(sql);
+                
+                pre.setInt(1, storeQty - soldQty);
+                pre.setDouble(2, id);
+
+                
+                pre.executeUpdate();
+                
+               
+            }
+            ConnectDB.close(conn);
+            pre.close();
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -15,12 +15,15 @@ public class Order {
     private int employeeID;
     private int customerID;
     private String codes;
+    private String address;
     private double total;
     private double customerPaid;
     private LocalDateTime times;
     private int state;
-
-    public Order(int employeeID, int customerID, String codes, double total, double customerPaid, LocalDateTime times, int state) {
+    private double discount;
+    private double finalTotal;
+    
+    public Order(int employeeID, int customerID, String codes, String address, LocalDateTime times, double total, double customerPaid, double discount, double finalTotal, int state) {
         this.employeeID = employeeID;
         this.customerID = customerID;
         this.codes = codes;
@@ -28,8 +31,12 @@ public class Order {
         this.customerPaid = customerPaid;
         this.times = times;
         this.state = state;
+        this.discount = discount;
+        this.finalTotal = finalTotal;
+        this.address = address;
+        
     }
-
+    
     public Order() {
     }
 
@@ -95,6 +102,30 @@ public class Order {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
+    public double getFinalTotal() {
+        return finalTotal;
+    }
+
+    public void setFinalTotal(double finalTotal) {
+        this.finalTotal = finalTotal;
     }
     
     

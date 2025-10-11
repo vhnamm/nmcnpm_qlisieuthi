@@ -21,7 +21,7 @@ public class CustomerDAO {
         
         try {
             conn = ConnectDB.getInstance();
-            String sql = "SELECT nd.ID AS userID, nd.tel, nd.hoTen, cus.ID AS customerID, cus.points "
+            String sql = "SELECT nd.ID AS userID, nd.tel, nd.hoTen, cus.ID AS customerID, cus.points, cus.maKH "
                     + "FROM users nd "
                     + "INNER JOIN customers cus "
                     + "ON nd.ID = cus.userID "
@@ -37,11 +37,68 @@ public class CustomerDAO {
                 cust.setUserID(rs.getInt("userID"));
                 cust.setId(rs.getInt("customerID"));
                 cust.setPoints(rs.getInt("points"));
-                
+                cust.setMaKH(rs.getString("maKH"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return cust;
+    }
+    
+    public void addCustomer(Khach customer){
+        Connection conn = null;
+        PreparedStatement pre;
+        ResultSet rs;
+        int id = -1;
+        
+        try {
+            conn = ConnectDB.getInstance();
+            String sql = "INSERT INTO customers (userID, points) VALUES (?,?)";
+            pre = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pre.setInt(1, customer.getUserID());
+            pre.setInt(2, customer.getPoints());
+
+            pre.executeUpdate();
+            rs = pre.getGeneratedKeys();
+            if(rs.next()){
+                id = rs.getInt(1);
+                String maKH = "KH" + String.format("%02d", id);
+
+                sql = "UPDATE customers SET maKH = ? WHERE ID = ?";
+                pre = conn.prepareStatement(sql);
+                pre.setString(1, maKH);
+                pre.setInt(2, id);
+                
+                pre.executeUpdate();
+            }
+                  
+            ConnectDB.close(conn);
+            pre.close();
+            rs.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void updatePoint(int id ,int point){
+        Connection conn = null;
+        PreparedStatement pre;
+        
+        try {
+            conn = ConnectDB.getInstance();
+            String sql = "UPDATE customers SET points = ? WHERE ID = ?";
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, point);
+            pre.setInt(2, id);
+            
+            pre.executeUpdate();
+            ConnectDB.close(conn);
+            pre.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

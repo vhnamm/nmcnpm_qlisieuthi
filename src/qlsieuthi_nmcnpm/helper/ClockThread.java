@@ -30,7 +30,7 @@ public class ClockThread implements Runnable{
                 LocalDateTime lcDateTime = LocalDateTime.now();
                 String formattedLcTime = lcDateTime.format(dateTimeFormatter);
                 SwingUtilities.invokeLater(() -> this.targetLabel.setText(formattedLcTime));
-                
+                System.out.println("Luồng clock chạy");
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 
