@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -19,16 +20,18 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import qlsieuthi_nmcnpm.DAO.CategoryDAO;
 import qlsieuthi_nmcnpm.DAO.ProductDAO;
 import qlsieuthi_nmcnpm.helper.ImageConvert;
 import qlsieuthi_nmcnpm.helper.ThousandSeperator;
+import qlsieuthi_nmcnpm.models.Category;
 import qlsieuthi_nmcnpm.models.Product;
 
 public class pnProduct extends javax.swing.JPanel {
     private DefaultTableModel tbModel;
     private Map<String, byte[]> map = new HashMap<>();
     private boolean isEdit = false;
-    
+    private DefaultComboBoxModel<Category> cbbCateModel;
     public pnProduct() {
         initComponents();
         
@@ -71,7 +74,6 @@ public class pnProduct extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtCate = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtUnit = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -93,6 +95,7 @@ public class pnProduct extends javax.swing.JPanel {
         lbImage = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        cbbCate = new javax.swing.JComboBox<>();
         radioGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
@@ -152,10 +155,6 @@ public class pnProduct extends javax.swing.JPanel {
         jLabel3.setText("Loại mặt hàng");
         dialogProduct.getContentPane().add(jLabel3);
         jLabel3.setBounds(180, 170, 108, 20);
-
-        txtCate.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        dialogProduct.getContentPane().add(txtCate);
-        txtCate.setBounds(310, 161, 167, 30);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new Color(61, 74, 89)
@@ -237,7 +236,7 @@ public class pnProduct extends javax.swing.JPanel {
         );
         jLabel11.setText("Mô tả sản phẩm");
         dialogProduct.getContentPane().add(jLabel11);
-        jLabel11.setBounds(180, 500, 107, 20);
+        jLabel11.setBounds(180, 500, 108, 20);
 
         txtDesc.setColumns(20);
         txtDesc.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -298,6 +297,8 @@ public class pnProduct extends javax.swing.JPanel {
         });
         dialogProduct.getContentPane().add(btnCancel);
         btnCancel.setBounds(880, 580, 100, 40);
+        dialogProduct.getContentPane().add(cbbCate);
+        cbbCate.setBounds(310, 160, 180, 30);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         jPanel1.setLayout(null);
@@ -367,7 +368,7 @@ public class pnProduct extends javax.swing.JPanel {
             }
         });
         tbProducts.setGridColor(new java.awt.Color(255, 255, 255));
-        tbProducts.setRowHeight(24);
+        tbProducts.setRowHeight(30);
         tbProducts.setSelectionBackground(new java.awt.Color(46, 155, 112));
         tbProducts.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tbProducts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -431,7 +432,7 @@ public class pnProduct extends javax.swing.JPanel {
             String name = txtName.getText().trim();
             String desc = txtDesc.getText().trim();
             String unit = txtUnit.getText().trim();
-            String cate = txtCate.getText().trim();
+           
             int state = radioOn.isSelected() ? 2 : 1;
             
             double sellPrice = Double.parseDouble(txtPrice.getText());
@@ -442,24 +443,17 @@ public class pnProduct extends javax.swing.JPanel {
             }else if(unit.isEmpty()){
                 JOptionPane.showMessageDialog(dialogProduct, "Vui lòng nhập đơn vị tính", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
-            }else if(cate.isEmpty()){
-                JOptionPane.showMessageDialog(dialogProduct, "Vui lòng nhập loại hàng", "Hệ thống", JOptionPane.WARNING_MESSAGE);
-                return;
             }
             
             
             ImageIcon prodImgIcon = (ImageIcon) lbImage.getIcon();
             //chuyen Image sang byte[] de luu vao database
             byte[] prodImgBytes = ImageConvert.getImageToByte(prodImgIcon);
+            int categoryID = ((Category) cbbCate.getSelectedItem()).getId();
+            String categoryName = ((Category) cbbCate.getSelectedItem()).getCategoryName();
             
-            Product prod = new Product();
-            prod.setName(name);
-            prod.setCate(cate);
-            prod.setDesc(desc);
-            prod.setUnit(unit);
-            prod.setState(state);
-            prod.setSellPrice(sellPrice);
-            prod.setImg(prodImgBytes);
+            Product prod = new Product(name, unit, categoryID, desc, 0 ,0 , sellPrice, state, prodImgBytes);
+
             
             //Khi bật 1 Jdialog lên thì SelectedRow mà chúng ta chọn khi bấm Sửa vẫn sẽ luu
             
@@ -472,7 +466,7 @@ public class pnProduct extends javax.swing.JPanel {
             //cap nhat lai view
             tbProducts.setValueAt(name, rowSelected, 1);
             tbProducts.setValueAt(desc, rowSelected, 2);
-            tbProducts.setValueAt(cate, rowSelected, 3);
+            tbProducts.setValueAt(categoryName, rowSelected, 3);
             tbProducts.setValueAt(unit, rowSelected, 4);
             tbProducts.setValueAt(sellPrice, rowSelected, 7);
             String trangThai = state == 2 ? "Đang kinh doanh": "Đã ngừng bán";
@@ -495,7 +489,7 @@ public class pnProduct extends javax.swing.JPanel {
             String name = txtName.getText().trim();
             String desc = txtDesc.getText().trim();
             String unit = txtUnit.getText().trim();
-            String cate = txtCate.getText().trim();
+           
             
             double sellPrice = Double.parseDouble(txtPrice.getText());
             
@@ -505,17 +499,14 @@ public class pnProduct extends javax.swing.JPanel {
             }else if(unit.isEmpty()){
                 JOptionPane.showMessageDialog(dialogProduct, "Vui lòng nhập đơn vị tính", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
-            }else if(cate.isEmpty()){
-                JOptionPane.showMessageDialog(dialogProduct, "Vui lòng nhập loại hàng", "Hệ thống", JOptionPane.WARNING_MESSAGE);
-                return;
             }
             
             
             ImageIcon prodImgIcon = (ImageIcon) lbImage.getIcon();
             //chuyen Image sang byte[] de luu vao database
             byte[] prodImgBytes = ImageConvert.getImageToByte(prodImgIcon);
-            
-            Product prod = new Product(name, unit, cate, desc, 0, 0, sellPrice, 2, prodImgBytes);
+            int categoryID = ((Category)cbbCate.getSelectedItem()).getId();
+            Product prod = new Product(name, unit, categoryID, desc, 0, 0, sellPrice, 2, prodImgBytes); // sửa thành lấy data từ Combobox Category
             ProductDAO prodDAO = new ProductDAO();
             boolean ok = prodDAO.addProduct(prod);
             
@@ -551,7 +542,15 @@ public class pnProduct extends javax.swing.JPanel {
             btnSave.setText("Lưu");
             txtName.setText(name);
             txtDesc.setText(des);
-            txtCate.setText(cate);
+            
+            for(int i=0; i<cbbCate.getItemCount(); i++){
+                Category cat = cbbCate.getItemAt(i);
+                
+                if(cat.getCategoryName().equals(cate)){
+                    cbbCate.setSelectedIndex(i);
+                    break;
+                }
+            }
             txtImportAvrg.setText(importPrice);
             txtPrice.setText(String.format("%.0f", sell));
             txtQuan.setText(quan);
@@ -621,7 +620,7 @@ public class pnProduct extends javax.swing.JPanel {
                 prod.getCodes(),
                 prod.getName(),
                 prod.getDesc(),
-                prod.getCate(),
+                prod.getCategoryName(),
                 prod.getUnit(),
                 prod.getStoreQuantity(),
                 prod.getImportAvrg(),
@@ -636,9 +635,19 @@ public class pnProduct extends javax.swing.JPanel {
         tbProducts.getColumnModel().getColumn(7).setCellRenderer(new ThousandSeperator());
         tbProducts.getColumnModel().getColumn(6).setCellRenderer(new ThousandSeperator());
     }
+    
+    public void initCategory(){
+        cbbCateModel  = (DefaultComboBoxModel) cbbCate.getModel();
+        cbbCateModel.removeAllElements();
+        CategoryDAO cateDAO = new CategoryDAO();
+        
+        for(Category category: cateDAO.getAllCategories()){
+            cbbCateModel.addElement(category);
+        }
+    }
     public void resetForm(){
         txtName.setText("");
-        txtCate.setText("");
+        
         txtDesc.setText("");
         txtPrice.setText("");
         txtUnit.setText("");
@@ -659,6 +668,7 @@ public class pnProduct extends javax.swing.JPanel {
     private javax.swing.JButton btnFind;
     private javax.swing.JButton btnModify;
     private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox<Category> cbbCate;
     private javax.swing.JDialog dialogProduct;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
@@ -683,7 +693,6 @@ public class pnProduct extends javax.swing.JPanel {
     private javax.swing.JRadioButton radioOff;
     private javax.swing.JRadioButton radioOn;
     private javax.swing.JTable tbProducts;
-    private javax.swing.JTextField txtCate;
     private javax.swing.JTextArea txtDesc;
     private javax.swing.JTextField txtFind;
     private javax.swing.JTextField txtImportAvrg;

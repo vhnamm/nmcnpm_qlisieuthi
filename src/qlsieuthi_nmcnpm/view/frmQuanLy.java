@@ -265,6 +265,7 @@ public class frmQuanLy extends javax.swing.JFrame {
     private void btnQLSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLSPActionPerformed
 
         ((pnProduct) pnMain.getComponent(2)).reloadData();
+        ((pnProduct) pnMain.getComponent(2)).initCategory();
         cardLayout.show(pnMain, "qlsp");
         resetColor();
         btnQLSP.setBackground(activeBtn);

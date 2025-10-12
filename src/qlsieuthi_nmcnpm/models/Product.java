@@ -12,10 +12,12 @@ package qlsieuthi_nmcnpm.models;
  */
 public class Product {
     private int id;
+    private int categoryID;
+    private String categoryName;
     private String name;
     private String codes;
     private String unit;
-    private String cate;
+    
     private String desc;
     private int storeQuantity;
     private double importAvrg;
@@ -23,11 +25,11 @@ public class Product {
     private int state;
     private byte[] img;
 
-    public Product(String name, String unit, String cate, String desc, int storeQuantity, double importAvrg, double sellPrice, int state, byte[] img) {
+    public Product(String name, String unit, int categoryID, String desc, int storeQuantity, double importAvrg, double sellPrice, int state, byte[] img) {
         
         this.name = name;
         this.unit = unit;
-        this.cate = cate;
+        this.categoryID = categoryID;
         this.desc = desc;
         this.storeQuantity = storeQuantity;
         this.importAvrg = importAvrg;
@@ -39,6 +41,15 @@ public class Product {
     public Product() {
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+    
+    
     public int getId() {
         return id;
     }
@@ -51,6 +62,15 @@ public class Product {
         return name;
     }
 
+    public int getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
+    }
+    
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -71,13 +91,6 @@ public class Product {
         this.unit = unit;
     }
 
-    public String getCate() {
-        return cate;
-    }
-
-    public void setCate(String cate) {
-        this.cate = cate;
-    }
 
     public String getDesc() {
         return desc;

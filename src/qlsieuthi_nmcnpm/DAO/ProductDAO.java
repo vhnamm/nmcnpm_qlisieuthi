@@ -20,22 +20,22 @@ public class ProductDAO {
         ResultSet rs;
         try {
             conn = ConnectDB.getInstance();
-            String sql = "SELECT ID from products WHERE productName = ? AND category = ?";
+            String sql = "SELECT ID from products WHERE productName = ? AND categoryID = ?";
             pre = conn.prepareStatement(sql);
             pre.setString(1, prod.getName());
-            pre.setString(2, prod.getCate());
+            pre.setInt(2, prod.getCategoryID());
             
             rs  = pre.executeQuery();
             if(rs.next()){
                 return false;
             }else{
 
-                sql = "INSERT INTO products (productName, unit, category, descriptions, storeQuantity, importAvrg, sellPrice, state, img) "
+                sql = "INSERT INTO products (productName, unit, categoryID, descriptions, storeQuantity, importAvrg, sellPrice, state, img) "
                         + "VALUES (?,?,?,?,?,?,?,?,?)";
                 pre = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 pre.setString(1, prod.getName());
                 pre.setString(2, prod.getUnit());
-                pre.setString(3, prod.getCate());
+                pre.setInt(3, prod.getCategoryID());
                 pre.setString(4, prod.getDesc());
                 pre.setInt(5, prod.getStoreQuantity());
                 pre.setDouble(6, prod.getImportAvrg());
@@ -75,7 +75,13 @@ public class ProductDAO {
         List<Product> list = new ArrayList<>();
         try {
             conn = ConnectDB.getInstance();
-            String sql = "SELECT * FROM products WHERE state <> 0";
+            String sql = "SELECT prod.ID, prod.productName, prod.codes, prod.unit, prod.descriptions, prod.storeQuantity, prod.importAvrg, "
+                    + "prod.sellPrice, prod.state, prod.img, cat.categoryName, cat.ID AS categoryID "
+                    + "FROM products prod "
+                    + "INNER JOIN categories cat "
+                    + "ON prod.categoryID = cat.ID "
+                    + "WHERE state <> 0 "
+                    + "ORDER BY prod.ID ASC";
             
             pre = conn.prepareStatement(sql);
             rs = pre.executeQuery();
@@ -85,7 +91,7 @@ public class ProductDAO {
                 String name = rs.getString("productName");
                 String codes = rs.getString("codes");
                 String unit = rs.getString("unit");
-                String cate  = rs.getString("category");
+                
                 String des = rs.getString("descriptions");
                 int quan = rs.getInt("storeQuantity");
                 double importAvrg = rs.getDouble("importAvrg");
@@ -93,9 +99,11 @@ public class ProductDAO {
                 int state = rs.getInt("state");
                 byte[] img = rs.getBytes("img");
                 
-                Product prod = new Product(name, unit, cate, des, quan, importAvrg, sellPrice, state, img);
+                Product prod = new Product(name, unit, rs.getInt("categoryID"), des, quan, importAvrg, sellPrice, state, img);
                 prod.setCodes(codes);
                 prod.setId(id);
+                
+                prod.setCategoryName(rs.getString("categoryName"));
                 list.add(prod);
             }
             ConnectDB.close(conn);
@@ -114,13 +122,13 @@ public class ProductDAO {
         try {
             conn = ConnectDB.getInstance();
             String sql = "UPDATE products "
-                    + "SET productName = ? , unit = ?, category = ?, descriptions = ?, sellPrice = ?, state = ?, img = ? "
+                    + "SET productName = ? , unit = ?, categoryID = ?, descriptions = ?, sellPrice = ?, state = ?, img = ? "
                     + "WHERE codes = ?";
             
             pre = conn.prepareStatement(sql);
             pre.setString(1, prod.getName());
             pre.setString(2, prod.getUnit());
-            pre.setString(3, prod.getCate());
+            pre.setInt(3, prod.getCategoryID());
             pre.setString(4, prod.getDesc());
             pre.setDouble(5, prod.getSellPrice());
             pre.setInt(6, prod.getState());
