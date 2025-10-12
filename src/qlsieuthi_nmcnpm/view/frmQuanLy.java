@@ -83,6 +83,7 @@ public class frmQuanLy extends javax.swing.JFrame {
         btnThongKe = new javax.swing.JButton();
         btnPhanQuyen = new javax.swing.JButton();
         lbHello = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
         pnMain = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -177,6 +178,14 @@ public class frmQuanLy extends javax.swing.JFrame {
         lbHello.setForeground(new java.awt.Color(255, 255, 255));
         lbHello.setText("jLabel1");
 
+        btnLogout.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btnLogout.setText("Đăng xuất");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -192,6 +201,7 @@ public class frmQuanLy extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(lbHello)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +221,9 @@ public class frmQuanLy extends javax.swing.JFrame {
                 .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(btnPhanQuyen, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 215, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
         );
 
         jPanel3.setBackground(new Color(61, 74, 89));
@@ -292,6 +304,15 @@ public class frmQuanLy extends javax.swing.JFrame {
         isActive = btnPhanQuyen.getText();
     }//GEN-LAST:event_btnPhanQuyenActionPerformed
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn đăng xuất?", "Hệ thống", JOptionPane.YES_NO_OPTION);
+        if(choice == JOptionPane.YES_OPTION){
+            this.dispose();
+            frmLogin login = new frmLogin();
+            login.setVisible(true);
+        }
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
     public void addPanel(){
         pnMain.add(new pnGreet(), "pnGreet"); 
         pnMain.add(new pnQLNhanVien(), "qlnv"); 
@@ -333,6 +354,7 @@ public class frmQuanLy extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPhanQuyen;
     private javax.swing.JButton btnQLNCC;
     private javax.swing.JButton btnQLNV;

@@ -207,7 +207,7 @@ public class frmNhanVien extends javax.swing.JFrame {
         int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn đăng xuất?", "Hệ thống", JOptionPane.YES_NO_OPTION);
         if(choice == JOptionPane.YES_OPTION){
             ((pnSell) pnMain.getComponent(1)).stopCurrentThread();
-            this.setVisible(false);
+            this.dispose();
             frmLogin login = new frmLogin();
             login.setVisible(true);
         }
