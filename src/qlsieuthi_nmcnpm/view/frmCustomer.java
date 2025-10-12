@@ -21,13 +21,18 @@ public class frmCustomer extends javax.swing.JFrame {
     
     public frmCustomer() {
         initComponents();
+        this.setLocationRelativeTo(null);
         sidebarTab = new ArrayList<>();
         sidebarTab.add(btnOrder); sidebarTab.add(btnHistory);
         initMouseEvent();
         
         cardLayout = new CardLayout();
         pnMain.setLayout(cardLayout);
-        pnMain.add(new )
+        pnMain.add(new pnGreet(), "pnGreet");
+        pnMain.add(new pnCustomerOrder(), "pnOrder");
+        pnMain.add(new pnCustomerHistory(), "pnHistory");
+        
+        
     }
     public void initMouseEvent(){
         for(JButton x : sidebarTab){
@@ -143,7 +148,7 @@ public class frmCustomer extends javax.swing.JFrame {
         pnMain.setLayout(pnMainLayout);
         pnMainLayout.setHorizontalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1213, Short.MAX_VALUE)
+            .addGap(0, 1221, Short.MAX_VALUE)
         );
         pnMainLayout.setVerticalGroup(
             pnMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,8 +161,8 @@ public class frmCustomer extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,12 +174,14 @@ public class frmCustomer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
+        cardLayout.show(pnMain, "pnOrder");
         resetColor();
         btnOrder.setBackground(activeBtn);
         this.currentActiveBtn = btnOrder.getText();
     }//GEN-LAST:event_btnOrderActionPerformed
 
     private void btnHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoryActionPerformed
+        cardLayout.show(pnMain, "pnHistory");
         resetColor();
         btnHistory.setBackground(activeBtn);
         this.currentActiveBtn = btnHistory.getText();
