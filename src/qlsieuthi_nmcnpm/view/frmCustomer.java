@@ -27,7 +27,7 @@ public class frmCustomer extends javax.swing.JFrame {
         
         cardLayout = new CardLayout();
         pnMain.setLayout(cardLayout);
-        
+        pnMain.add(new )
     }
     public void initMouseEvent(){
         for(JButton x : sidebarTab){
