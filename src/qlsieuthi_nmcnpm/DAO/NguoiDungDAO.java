@@ -102,4 +102,22 @@ public class NguoiDungDAO {
         }
         return id;
     }
+    
+    public void updateName(String name, int id){
+        Connection conn;
+        PreparedStatement pre;
+        try {
+          conn = ConnectDB.getInstance();
+          String sql = "UPDATE users SET hoTen = ? WHERE ID = ?";
+          pre = conn.prepareStatement(sql);
+          pre.setString(1, name);
+          pre.setInt(2, id);
+          pre.executeUpdate();
+          
+          ConnectDB.close(conn);
+          pre.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

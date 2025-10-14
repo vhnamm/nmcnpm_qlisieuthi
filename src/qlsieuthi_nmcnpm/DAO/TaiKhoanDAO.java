@@ -66,7 +66,12 @@ public class TaiKhoanDAO {
             String sql = "INSERT INTO accounts (userID, tenDangNhap, matKhau, quyen, isActive) VALUES (?,?,?,?,?)";
             pre = conn.prepareStatement(sql);
             
-            pre.setInt(1, tk.getNguoiDung().getUserID());
+            if(tk.getNguoiDung() == null){
+                pre.setInt(1, tk.getUserID());
+            }else{
+                pre.setInt(1, tk.getNguoiDung().getUserID());
+            }
+            
             pre.setString(2, tk.getTenDangNhap());
             pre.setString(3, tk.getMatKhau());
             pre.setString(4, tk.getQuyen());
@@ -152,4 +157,6 @@ public class TaiKhoanDAO {
         } catch (SQLException e) {
         }
     }
+    
+    
 }

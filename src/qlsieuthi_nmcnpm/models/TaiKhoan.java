@@ -15,6 +15,7 @@ public class TaiKhoan {
     private boolean isActive;
     
     private NguoiDung nguoiDung;
+    private int userID;
     
     public TaiKhoan(String tenDangNhap, String matKhau, String quyen, boolean isActive, NguoiDung nguoiDung) {
         this.tenDangNhap = tenDangNhap;
@@ -24,9 +25,27 @@ public class TaiKhoan {
         this.nguoiDung = nguoiDung;
     }
 
+    public TaiKhoan(String tenDangNhap, String matKhau, String quyen, boolean isActive, int userID) {
+        this.tenDangNhap = tenDangNhap;
+        this.matKhau = matKhau;
+        this.quyen = quyen;
+        this.isActive = isActive;
+        this.userID = userID;
+    }
+    
+    
     public TaiKhoan() {
     }
 
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+    
+    
     public String getTenDangNhap() {
         return tenDangNhap;
     }
