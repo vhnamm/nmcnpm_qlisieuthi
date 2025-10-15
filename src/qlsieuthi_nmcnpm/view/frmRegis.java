@@ -206,7 +206,7 @@ public class frmRegis extends javax.swing.JFrame {
         if(userID != -1){ // nếu đã có bản ghi với SDT trong NguoiDung
             //nếu chưa có TaiKhoan foreign key đến bản ghi này (tạo khi là khách vãng lai và cho SDT)
             TaiKhoanDAO tkDAO = new TaiKhoanDAO();
-            if(!tkDAO.checkExist(tel)){
+            if(tkDAO.checkExist(tel)){
                 TaiKhoan tk = new TaiKhoan(tel, pass, "khach", true, userID);
                 tkDAO.createAccount(tk);
                 ndDAO.updateName(name, userID);

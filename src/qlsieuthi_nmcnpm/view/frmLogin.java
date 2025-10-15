@@ -152,7 +152,12 @@ public class frmLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(frmNV, "Đăng nhập thành công!", "Hệ thống", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
                 break;
-                
+            case "khach":
+                frmCustomer frmKH = new frmCustomer();
+                this.dispose();
+                frmKH.setVisible(true);
+                JOptionPane.showMessageDialog(frmKH, "Đăng nhập thành công!", "Hệ thống", JOptionPane.INFORMATION_MESSAGE);
+                break;
             default:
                 throw new AssertionError();
         }
