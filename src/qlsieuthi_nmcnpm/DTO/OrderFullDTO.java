@@ -17,18 +17,27 @@ public class OrderFullDTO {
     private String customerName;
     private String customerCode;
     private String customerTel;
+    private int customerPoint;
     private List<OrderDetailDTO> soldProducts;
 
-    public OrderFullDTO(String orderCode, double discount, double total, String customerName, String customerCode, String customerTel) {
+    public OrderFullDTO(String orderCode, double discount, double total, String customerName, String customerCode, String customerTel, int customerPoint) {
         this.orderCode = orderCode;
         this.discount = discount;
         this.total = total;
         this.customerName = customerName;
         this.customerCode = customerCode;
         this.customerTel = customerTel;
-        
+        this.customerPoint = customerPoint;
     }
 
+    public int getCustomerPoint() {
+        return customerPoint;
+    }
+
+    public void setCustomerPoint(int customerPoint) {
+        this.customerPoint = customerPoint;
+    }
+    
     public String getOrderCode() {
         return orderCode;
     }

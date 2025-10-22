@@ -122,7 +122,7 @@ public class OrderDAO {
         try {
             conn = ConnectDB.getInstance();
             String sql = "SELECT o.codes AS orderCode, o.discount, o.total AS orderTotal, "
-                    + "cus.maKH, user.hoTen, user.tel, "
+                    + "cus.maKH, cus.points, user.hoTen, user.tel, "
                     + "odt.quantity, odt.unitPrice, odt.total AS productTotal, "
                     + "prod.codes AS productCode, prod.productName "
                     + "FROM orders o "
@@ -136,7 +136,9 @@ public class OrderDAO {
             rs = pre.executeQuery();
             while(rs.next()){
                 if(orderFullDTO == null){
-                    orderFullDTO = new OrderFullDTO(rs.getString("orderCode"), rs.getDouble("discount"), rs.getDouble("orderTotal"), rs.getString("hoTen"), rs.getString("maKH"), rs.getString("tel"));
+                    orderFullDTO = new OrderFullDTO(rs.getString("orderCode"), rs.getDouble("discount"), rs.getDouble("orderTotal"), rs.getString("hoTen"), rs.getString("maKH"), rs.getString("tel"), 
+                            rs.getInt("points")
+                    );
                     
                 }
                 

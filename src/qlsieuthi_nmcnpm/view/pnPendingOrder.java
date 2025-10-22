@@ -8,6 +8,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import qlsieuthi_nmcnpm.DAO.CustomerDAO;
 import qlsieuthi_nmcnpm.DAO.OrderDAO;
 import qlsieuthi_nmcnpm.DAO.ProductDAO;
 import qlsieuthi_nmcnpm.DTO.OrderDetailDTO;
@@ -53,7 +54,6 @@ public class pnPendingOrder extends javax.swing.JPanel {
         txtPendingCode = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtPendingTime = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtCustomerName = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -76,6 +76,8 @@ public class pnPendingOrder extends javax.swing.JPanel {
         jLabel19 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         btnAccept = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        txtPoint = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -117,12 +119,12 @@ public class pnPendingOrder extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Chi tiết đơn hàng");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(270, 10, 147, 25);
+        jLabel1.setBounds(270, 10, 160, 25);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Mã đơn");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(50, 60, 51, 30);
+        jLabel4.setBounds(50, 60, 60, 30);
 
         txtPendingCode.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtPendingCode.setEnabled(false);
@@ -140,48 +142,43 @@ public class pnPendingOrder extends javax.swing.JPanel {
         jPanel1.add(txtPendingTime);
         txtPendingTime.setBounds(410, 60, 150, 30);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel6.setText("Thông tin khách hàng");
-        jPanel1.add(jLabel6);
-        jLabel6.setBounds(50, 110, 160, 22);
-
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Tên người nhận");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(50, 150, 110, 30);
+        jLabel7.setBounds(50, 120, 110, 30);
 
         txtCustomerName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCustomerName.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtCustomerName.setEnabled(false);
         jPanel1.add(txtCustomerName);
-        txtCustomerName.setBounds(170, 150, 170, 30);
+        txtCustomerName.setBounds(180, 120, 170, 30);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Mã KH");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(370, 150, 50, 30);
+        jLabel8.setBounds(400, 120, 50, 30);
 
         txtCustomerCode.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCustomerCode.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtCustomerCode.setEnabled(false);
         jPanel1.add(txtCustomerCode);
-        txtCustomerCode.setBounds(440, 150, 140, 30);
+        txtCustomerCode.setBounds(470, 120, 80, 30);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("SĐT");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(50, 200, 40, 30);
+        jLabel9.setBounds(50, 190, 30, 30);
 
         txtTel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtTel.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtTel.setEnabled(false);
         jPanel1.add(txtTel);
-        txtTel.setBounds(100, 200, 150, 30);
+        txtTel.setBounds(100, 190, 150, 30);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setText("Địa chỉ giao");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(280, 200, 80, 30);
+        jLabel10.setBounds(290, 190, 80, 30);
 
         txtAddress.setColumns(20);
         txtAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -193,7 +190,7 @@ public class pnPendingOrder extends javax.swing.JPanel {
         jScrollPane2.setViewportView(txtAddress);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(380, 210, 210, 80);
+        jScrollPane2.setBounds(380, 190, 210, 80);
 
         tbOrderSummary.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tbOrderSummary.setModel(new javax.swing.table.DefaultTableModel(
@@ -281,6 +278,17 @@ public class pnPendingOrder extends javax.swing.JPanel {
         });
         jPanel1.add(btnAccept);
         btnAccept.setBounds(320, 760, 270, 40);
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel12.setText("Điểm khách hàng");
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(40, 250, 120, 20);
+
+        txtPoint.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtPoint.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txtPoint.setEnabled(false);
+        jPanel1.add(txtPoint);
+        txtPoint.setBounds(180, 250, 90, 30);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Tìm theo SĐT");
@@ -378,7 +386,7 @@ public class pnPendingOrder extends javax.swing.JPanel {
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         int choice = JOptionPane.showConfirmDialog(this, "Xác nhận đơn hàng và bắt đầu giao hàng?", "Hệ thống", JOptionPane.YES_NO_OPTION);
         if(choice == JOptionPane.YES_OPTION){
-            int orderID = Integer.parseInt(txtPendingCode.getText());
+            int orderID = Integer.parseInt(txtPendingCode.getText().substring(2));
             OrderDAO orderDAO = new OrderDAO();
             orderDAO.updateOrderStatus(orderID, 2); // Da xac nhan
             
@@ -387,7 +395,26 @@ public class pnPendingOrder extends javax.swing.JPanel {
                 int productID = Integer.parseInt(tbOrderSummary.getValueAt(i, 0).toString().substring(2));
                 int qty = Integer.parseInt(tbOrderSummary.getValueAt(i, 2).toString());
                 
+                productDAO.updateSoldQty(productID, qty);
             }
+            
+            double discount = SeperatorConvert.thousandFormattedToDouble(lbSale.getText());
+            CustomerDAO customerDAO = new CustomerDAO();
+            int customerID = Integer.parseInt(txtCustomerCode.getText().substring(2));
+            int currentPoint = Integer.parseInt(txtPoint.getText());
+            
+            if(discount == 0){
+                double total = SeperatorConvert.thousandFormattedToDouble(lbTotal.getText());
+                int earnedPoint = (int) Math.round((total * 0.04) / 1000);
+                customerDAO.updatePoint(customerID, earnedPoint + currentPoint);
+            }else{// khach su dung diem
+                int usedPoint = (int) (discount / 1000);
+                customerDAO.updatePoint(customerID, currentPoint - usedPoint);
+            }
+            
+            JOptionPane.showMessageDialog(this, "Xác nhận đơn hàng thành công, vui lòng kiểm tra trong đơn đã xác nhận", "Hệ thống", JOptionPane.INFORMATION_MESSAGE);
+            loadPendingData();
+            clearUI();
         }
     }//GEN-LAST:event_btnAcceptActionPerformed
 
@@ -408,6 +435,19 @@ public class pnPendingOrder extends javax.swing.JPanel {
         }
         tbPending.setModel(tbModel);
     }
+    public void clearUI(){
+        tbSummaryModel.setRowCount(0);
+        txtPendingCode.setText("");
+        txtPendingTime.setText("");
+        txtCustomerCode.setText("");
+        txtCustomerName.setText("");
+        txtTel.setText("");
+        txtPoint.setText("");
+        txtAddress.setText("");
+        lbTotal.setText("0");
+        lbFinalTotal.setText("0");
+        lbSale.setText("0");
+    }
     public void tableRowChangedActionPerformed(ListSelectionEvent e){
         if(!e.getValueIsAdjusting()){
             int row = tbPending.getSelectedRow();
@@ -425,6 +465,7 @@ public class pnPendingOrder extends javax.swing.JPanel {
                     txtPendingTime.setText(times);
                     lbFinalTotal.setText(SeperatorConvert.doubleToThousandFormatted(finalTotal));
                     txtAddress.setText(address);
+                    txtPoint.setText(String.valueOf(orderFullDTO.getCustomerPoint()));
                     
                     txtCustomerCode.setText(orderFullDTO.getCustomerCode());
                     txtCustomerName.setText(orderFullDTO.getCustomerName());
@@ -443,6 +484,8 @@ public class pnPendingOrder extends javax.swing.JPanel {
                             x.getTotal()
                         });
                     }
+                }else{
+                    clearUI();
                 }
                 
         }
@@ -456,6 +499,7 @@ public class pnPendingOrder extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
@@ -465,7 +509,6 @@ public class pnPendingOrder extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -487,6 +530,7 @@ public class pnPendingOrder extends javax.swing.JPanel {
     private javax.swing.JTextField txtCustomerName;
     private javax.swing.JTextField txtPendingCode;
     private javax.swing.JTextField txtPendingTime;
+    private javax.swing.JTextField txtPoint;
     private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables
 }
