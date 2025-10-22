@@ -30,12 +30,12 @@ public class pnPhanCongCaLam extends javax.swing.JPanel {
        NhanVienDAO nvDAO = new NhanVienDAO();
        
        for(NhanVien nv : nvDAO.getAllNhanVien()){
-           String conLam = nv.getTrangThai() == 3 ? "Đang làm" : nv.getTrangThai() == 2 ? "Đã nghỉ việc" : "";
+           
            tbModel.addRow(new Object[]{
                nv.getMaNV(),
                nv.getHoTen(),
                nv.getTel(),
-               conLam
+               "Đang làm"
            });
        }
        tbNV.setModel(tbModel);
@@ -255,6 +255,10 @@ public class pnPhanCongCaLam extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTaoLichActionPerformed
 
     private void btnTaoPhieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoPhieuActionPerformed
+        if(tblPhieu.getRowCount() == 0){
+            JOptionPane.showMessageDialog(this, "Chua co ca lam nao duoc them", "He thong",  JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         int choice = JOptionPane.showConfirmDialog(this, "Tạo ca làm cho những nhân viên này?", "Hệ thống", JOptionPane.YES_NO_OPTION);
         if(choice == JOptionPane.YES_OPTION){
                 NhanVienDAO nvdao = new NhanVienDAO();

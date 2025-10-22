@@ -96,7 +96,14 @@ public class pnProduct extends javax.swing.JPanel {
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         cbbCate = new javax.swing.JComboBox<>();
+        btnAddCate = new javax.swing.JButton();
         radioGroup = new javax.swing.ButtonGroup();
+        dialogAddCate = new javax.swing.JDialog();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtCategory = new javax.swing.JTextField();
+        btnCancelCate = new javax.swing.JButton();
+        btnSaveCate = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
         btnModify = new javax.swing.JButton();
@@ -110,6 +117,7 @@ public class pnProduct extends javax.swing.JPanel {
 
         dialogProduct.setMinimumSize(new java.awt.Dimension(1187, 719));
         dialogProduct.setModal(true);
+        dialogProduct.setPreferredSize(new java.awt.Dimension(1187, 719));
         dialogProduct.getContentPane().setLayout(null);
 
         jPanel2.setBackground(new Color(61, 74, 89));
@@ -236,7 +244,7 @@ public class pnProduct extends javax.swing.JPanel {
         );
         jLabel11.setText("Mô tả sản phẩm");
         dialogProduct.getContentPane().add(jLabel11);
-        jLabel11.setBounds(180, 500, 108, 20);
+        jLabel11.setBounds(180, 500, 107, 20);
 
         txtDesc.setColumns(20);
         txtDesc.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -279,7 +287,7 @@ public class pnProduct extends javax.swing.JPanel {
 
         btnSave.setText("Thêm sản phẩm");
         dialogProduct.getContentPane().add(btnSave);
-        btnSave.setBounds(990, 580, 120, 40);
+        btnSave.setBounds(980, 580, 120, 40);
         btnSave.addActionListener((evt) -> {
             if(!isEdit){
                 btnSaveNewActionPerformed(evt);
@@ -296,9 +304,88 @@ public class pnProduct extends javax.swing.JPanel {
             }
         });
         dialogProduct.getContentPane().add(btnCancel);
-        btnCancel.setBounds(880, 580, 100, 40);
+        btnCancel.setBounds(840, 580, 100, 40);
         dialogProduct.getContentPane().add(cbbCate);
         cbbCate.setBounds(310, 160, 180, 30);
+
+        btnAddCate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAddCate.setText("Thêm loại");
+        btnAddCate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddCateActionPerformed(evt);
+            }
+        });
+        dialogProduct.getContentPane().add(btnAddCate);
+        btnAddCate.setBounds(520, 160, 90, 30);
+
+        dialogProduct.setLocationRelativeTo(null);
+
+        dialogAddCate.setMinimumSize(new java.awt.Dimension(432, 308));
+        dialogAddCate.setModal(true);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Thêm danh mục");
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel12.setText("Tên danh mục");
+
+        txtCategory.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        btnCancelCate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCancelCate.setText("Huỷ");
+        btnCancelCate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelCateActionPerformed(evt);
+            }
+        });
+
+        btnSaveCate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnSaveCate.setText("Lưu");
+        btnSaveCate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveCateActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dialogAddCateLayout = new javax.swing.GroupLayout(dialogAddCate.getContentPane());
+        dialogAddCate.getContentPane().setLayout(dialogAddCateLayout);
+        dialogAddCateLayout.setHorizontalGroup(
+            dialogAddCateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogAddCateLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
+            .addGroup(dialogAddCateLayout.createSequentialGroup()
+                .addGroup(dialogAddCateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dialogAddCateLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(btnCancelCate, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnSaveCate, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dialogAddCateLayout.createSequentialGroup()
+                        .addGap(165, 165, 165)
+                        .addComponent(jLabel1)))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        dialogAddCateLayout.setVerticalGroup(
+            dialogAddCateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogAddCateLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(66, 66, 66)
+                .addGroup(dialogAddCateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addGroup(dialogAddCateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCancelCate, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(btnSaveCate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(55, 55, 55))
+        );
+
+        dialogAddCate.setLocationRelativeTo(dialogProduct);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         jPanel1.setLayout(null);
@@ -436,7 +523,7 @@ public class pnProduct extends javax.swing.JPanel {
             int state = radioOn.isSelected() ? 2 : 1;
             
             double sellPrice = Double.parseDouble(txtPrice.getText());
-            
+            if(sellPrice <= 0) throw new NumberFormatException();
             if(name.isEmpty()){
                 JOptionPane.showMessageDialog(dialogProduct, "Vui lòng nhập tên sản phẩm", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
@@ -447,6 +534,10 @@ public class pnProduct extends javax.swing.JPanel {
             
             
             ImageIcon prodImgIcon = (ImageIcon) lbImage.getIcon();
+            if(prodImgIcon == null){
+                JOptionPane.showMessageDialog(dialogProduct, "Vui lòng chọn ảnh sản phẩm", "Hệ thống", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
             //chuyen Image sang byte[] de luu vao database
             byte[] prodImgBytes = ImageConvert.getImageToByte(prodImgIcon);
             int categoryID = ((Category) cbbCate.getSelectedItem()).getId();
@@ -492,7 +583,7 @@ public class pnProduct extends javax.swing.JPanel {
            
             
             double sellPrice = Double.parseDouble(txtPrice.getText());
-            
+            if(sellPrice <= 0) throw new NumberFormatException();
             if(name.isEmpty()){
                 JOptionPane.showMessageDialog(dialogProduct, "Vui lòng nhập tên sản phẩm", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
@@ -504,6 +595,11 @@ public class pnProduct extends javax.swing.JPanel {
             
             ImageIcon prodImgIcon = (ImageIcon) lbImage.getIcon();
             //chuyen Image sang byte[] de luu vao database
+            
+            if(prodImgIcon == null){
+                JOptionPane.showMessageDialog(dialogProduct, "Vui lòng chọn ảnh sản phẩm", "Hệ thống", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
             byte[] prodImgBytes = ImageConvert.getImageToByte(prodImgIcon);
             int categoryID = ((Category)cbbCate.getSelectedItem()).getId();
             Product prod = new Product(name, unit, categoryID, desc, 0, 0, sellPrice, 2, prodImgBytes); // sửa thành lấy data từ Combobox Category
@@ -605,6 +701,30 @@ public class pnProduct extends javax.swing.JPanel {
             
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnAddCateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCateActionPerformed
+        dialogAddCate.setVisible(true);
+    }//GEN-LAST:event_btnAddCateActionPerformed
+
+    private void btnCancelCateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelCateActionPerformed
+        dialogAddCate.setVisible(false);
+        txtCategory.setText("");
+    }//GEN-LAST:event_btnCancelCateActionPerformed
+
+    private void btnSaveCateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveCateActionPerformed
+        String cateName = txtCategory.getText().trim();
+        if(cateName.isEmpty()){
+            JOptionPane.showMessageDialog(dialogAddCate, "Ten danh muc khong duoc trong");
+            return;
+        }
+        Category cate = new Category(cateName);
+        CategoryDAO categoryDAO = new CategoryDAO();
+        categoryDAO.addCategory(cate);
+        initCategory();
+        JOptionPane.showMessageDialog(dialogAddCate, "Them danh muc thanh cong!");
+        dialogAddCate.setVisible(false);
+        txtCategory.setText("");
+    }//GEN-LAST:event_btnSaveCateActionPerformed
     
     public void reloadData(){
         tbModel = (DefaultTableModel)tbProducts.getModel();
@@ -662,17 +782,23 @@ public class pnProduct extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAddCate;
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnCancelCate;
     private javax.swing.JButton btnChoseImg;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnFind;
     private javax.swing.JButton btnModify;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSaveCate;
     private javax.swing.JComboBox<Category> cbbCate;
+    private javax.swing.JDialog dialogAddCate;
     private javax.swing.JDialog dialogProduct;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -693,6 +819,7 @@ public class pnProduct extends javax.swing.JPanel {
     private javax.swing.JRadioButton radioOff;
     private javax.swing.JRadioButton radioOn;
     private javax.swing.JTable tbProducts;
+    private javax.swing.JTextField txtCategory;
     private javax.swing.JTextArea txtDesc;
     private javax.swing.JTextField txtFind;
     private javax.swing.JTextField txtImportAvrg;

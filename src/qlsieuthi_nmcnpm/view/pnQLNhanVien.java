@@ -342,7 +342,7 @@ public class pnQLNhanVien extends javax.swing.JPanel {
                 reloadDataNVTab();
                 break;
             case 1:
-                ((pnPhanCongCaLam) mainTabbedPane.getComponent(1)).reloadPhanCongData();
+                ((pnPhanCongCaLam) mainTabbedPane.getComponent(1)).reloadData();
                 break;
         }
     }//GEN-LAST:event_mainTabbedPaneStateChanged

@@ -166,7 +166,8 @@ public class NhanVienDAO {
                     + "FROM employees nv "
                     + "INNER JOIN users nd "
                     + "ON nv.userID = nd.ID "
-                    + "WHERE nv.trangThai <> 0";
+                    + "INNER JOIN accounts acc ON acc.userID = nd.ID "
+                    + "WHERE acc.isActive = true";
             
             pre = conn.prepareStatement(sql);
             rs = pre.executeQuery();

@@ -33,9 +33,34 @@ public class CategoryDAO {
                 
                 list.add(cate);
             }
+            ConnectDB.close(conn);
+            pre.close();
+            rs.close();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
+    }
+    
+    public void addCategory(Category cat){
+        Connection conn;
+        PreparedStatement pre;
+
+        
+        try {
+            conn = ConnectDB.getInstance();
+            String sql = "INSERT INTO categories (categoryName) VALUES (?)";
+            
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, cat.getCategoryName());
+            pre.executeUpdate();
+            
+            ConnectDB.close(conn);
+            pre.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }
 }

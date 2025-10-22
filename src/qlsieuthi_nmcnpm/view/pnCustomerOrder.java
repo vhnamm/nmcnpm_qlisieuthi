@@ -678,6 +678,12 @@ public class pnCustomerOrder extends javax.swing.JPanel {
             String code = tbProduct.getValueAt(row, 0).toString();
             String name = tbProduct.getValueAt(row, 1).toString();
             int qty = (int) spinnerQty.getValue();
+            
+            ProductDAO productDAO = new ProductDAO();
+            if(!productDAO.checkStoreQty(Integer.parseInt(code.substring(2)), qty)){
+                JOptionPane.showMessageDialog(this, "Khong du so luong hang", "He thong", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
             String unit = tbProduct.getValueAt(row, 2).toString();
             double price = (double)  tbProduct.getValueAt(row, 3);
             double total = price * qty;
@@ -713,6 +719,13 @@ public class pnCustomerOrder extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         int modifiedQty = (int)spinnerModify.getValue();
         int row = tbCart.getSelectedRow();
+        String code = tbCart.getValueAt(row, 0).toString();
+        ProductDAO productDAO = new ProductDAO();
+            if(!productDAO.checkStoreQty(Integer.parseInt(code.substring(2)), modifiedQty)){
+                JOptionPane.showMessageDialog(dialogModify, "Khong du so luong hang", "He thong", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+        
         
         double price = (double) tbCart.getValueAt(row, 4);
         this.total -=  (double)tbCart.getValueAt(row, 5);

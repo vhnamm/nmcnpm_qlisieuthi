@@ -286,4 +286,26 @@ public class ProductDAO {
         }
         return list;
     }
+    
+    public boolean checkStoreQty(int id, int orderQty){
+        Connection conn;
+        PreparedStatement pre;
+        ResultSet rs;
+        try {
+            conn = ConnectDB.getInstance();
+            String sql = "SELECT storeQuantity FROM products WHERE ID = ?";
+            pre = conn.prepareStatement(sql);
+            
+            pre.setInt(1, id);
+            rs = pre.executeQuery();
+            if(rs.next()){
+                int storeQty =  rs.getInt("storeQuantity");
+                if(storeQty  < orderQty)  return  false;
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 }
