@@ -142,14 +142,14 @@ public class TaiKhoanDAO {
         try {
             conn = ConnectDB.getInstance();
             String sql  = "UPDATE accounts SET "
-                    + "tenDangNhap = ?, "
-                    + "isActive = ? "
+                    + "tenDangNhap = ? "
+                    
                     + "WHERE userID = ?";
             pre = conn.prepareStatement(sql);
             
             pre.setString(1, tk.getTenDangNhap());
-            pre.setBoolean(2, tk.isIsActive());
-            pre.setInt(3, tk.getNguoiDung().getUserID());
+            
+            pre.setInt(2, tk.getNguoiDung().getUserID());
             
             pre.executeUpdate();
             ConnectDB.close(conn);

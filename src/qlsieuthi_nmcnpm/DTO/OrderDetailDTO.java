@@ -1,54 +1,42 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package qlsieuthi_nmcnpm.models;
+package qlsieuthi_nmcnpm.DTO;
 
 /**
  *
  * @author ADMIN
  */
-public class OrderDetail {
-    private int id;
-    private int orderID;
-    private int productID;
+public class OrderDetailDTO {
+    private String productName;
+    private String productCode;
     private int qty;
     private double unitPrice;
     private double total;
 
-    public OrderDetail(int orderID, int productID, int qty, double unitPrice, double total) {
-        this.orderID = orderID;
-        this.productID = productID;
+    public OrderDetailDTO(String productName, String productCode, int qty, double unitPrice, double total) {
+        this.productName = productName;
+        this.productCode = productCode;
         this.qty = qty;
         this.unitPrice = unitPrice;
         this.total = total;
     }
 
-    public OrderDetail() {
+    public String getProductName() {
+        return productName;
     }
 
-    public int getId() {
-        return id;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getProductCode() {
+        return productCode;
     }
 
-    public int getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
-    }
-
-    public int getProductID() {
-        return productID;
-    }
-
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 
     public int getQty() {
@@ -74,6 +62,5 @@ public class OrderDetail {
     public void setTotal(double total) {
         this.total = total;
     }
-    
     
 }

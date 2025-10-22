@@ -237,4 +237,53 @@ public class ProductDAO {
             e.printStackTrace();
         }
     }
+    
+    public List<Product> getFilteredProduct(int categoryID, String orderBy){
+        Connection conn;
+        PreparedStatement pre = null;
+        ResultSet rs;
+        List<Product> list = new ArrayList<>();
+        
+        try {
+            conn = ConnectDB.getInstance();
+            String sql;
+            
+            if(categoryID != 0){
+                sql = orderBy == null ? "SELECT * FROM products WHERE categoryID = ? ORDER BY ID ASC" : "SELECT * FROM products WHERE categoryID = ? ORDER BY sellPrice " + orderBy;
+                
+            }else{//khi người dùng chọn lọc theo tất cả sản phẩm nhưng sắp xếp giá theo tăng hoặc giảm
+                sql = orderBy == null ? "SELECT * FROM products ORDER BY ID ASC" : "SELECT * FROM products ORDER BY sellPrice " + orderBy;
+            }
+            
+            pre = conn.prepareStatement(sql);
+            if(categoryID != 0)
+             pre.setInt(1, categoryID);
+            
+           
+            
+            rs = pre.executeQuery();
+            while(rs.next()){
+                Product prod = new Product(
+                   rs.getString("productName"),
+                   rs.getString("unit"),
+                   rs.getInt("categoryID"),
+                   rs.getString("descriptions"),
+                   rs.getInt("storeQuantity"),
+                   rs.getDouble("importAvrg"),
+                   rs.getDouble("sellPrice"),
+                   rs.getInt("state"),
+                   rs.getBytes("img")
+                );
+                prod.setCodes(rs.getString("codes"));
+                list.add(prod);
+                
+            }
+            ConnectDB.close(conn);
+            pre.close();
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

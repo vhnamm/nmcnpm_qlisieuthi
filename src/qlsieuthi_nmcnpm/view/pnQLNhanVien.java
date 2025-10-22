@@ -64,8 +64,6 @@ public class pnQLNhanVien extends javax.swing.JPanel {
         txtSalary = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        cbbState = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         txtMa = new javax.swing.JTextField();
@@ -228,29 +226,18 @@ public class pnQLNhanVien extends javax.swing.JPanel {
         jPanel1.add(jLabel10);
         jLabel10.setBounds(950, 180, 43, 30);
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        jLabel11.setText("Trạng thái");
-        jPanel1.add(jLabel11);
-        jLabel11.setBounds(810, 30, 70, 18);
-
-        cbbState.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbbState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang làm", "Đã nghỉ việc" }));
-        jPanel1.add(cbbState);
-        cbbState.setBounds(890, 20, 160, 30);
-        cbbState.setEnabled(false);
-
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả nhân viên", "Đã nghỉ làm", "Đang làm" }));
         jPanel1.add(jComboBox2);
         jComboBox2.setBounds(1010, 180, 140, 30);
 
         jLabel9.setText("Mã NV");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(810, 80, 37, 16);
+        jLabel9.setBounds(800, 20, 37, 16);
 
         txtMa.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         txtMa.setEnabled(false);
         jPanel1.add(txtMa);
-        txtMa.setBounds(890, 80, 100, 24);
+        txtMa.setBounds(870, 20, 100, 24);
 
         pnTabbedQLNV.add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -282,19 +269,19 @@ public class pnQLNhanVien extends javax.swing.JPanel {
             String gender = rdioF.isSelected() ? "Nữ" : rdioM.isSelected() ? "Nam" : "";
 
             if(name.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Vui lòng điền tên nhân viên", "NUKE", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Vui lòng điền tên nhân viên", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             else if(tel.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Vui lòng điền SĐT", "NUKE", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Vui lòng điền SĐT", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             else if(gender.equals("")){
-                JOptionPane.showMessageDialog(this, "Vui lòng chọn giới tính", "NUKE", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn giới tính", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
             }          
             else if(addr.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Vui lòng điền địa chỉ", "NUKE", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Vui lòng điền địa chỉ", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             else{
@@ -416,9 +403,7 @@ public class pnQLNhanVien extends javax.swing.JPanel {
             if(gender.equals("Nam")) rdioM.setSelected(true);
             else if(gender.equals("Nữ")) rdioF.setSelected(true);
             
-            if(state.equals("Đang làm")) cbbState.setSelectedIndex(0);
-            else if(state.equals("Đã nghỉ việc")) cbbState.setSelectedIndex(1);
-            cbbState.setEnabled(true);
+            
         }
     }//GEN-LAST:event_btnModifyActionPerformed
 
@@ -432,22 +417,22 @@ public class pnQLNhanVien extends javax.swing.JPanel {
             Double salary = Double.valueOf(txtSalary.getText().trim());
             String addr = txtaAddress.getText().trim();
             String gender = rdioF.isSelected() ? "Nữ" : rdioM.isSelected() ? "Nam" : "";
-            int active = cbbState.getSelectedIndex() == 0 ? 3 : 2; // đang làm hoặc đình chỉ
+            
                     
             if(name.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Vui lòng điền tên nhân viên", "NUKE", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Vui lòng điền tên nhân viên", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             else if(tel.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Vui lòng điền SĐT", "NUKE", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Vui lòng điền SĐT", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             else if(gender.equals("")){
-                JOptionPane.showMessageDialog(this, "Vui lòng chọn giới tính", "NUKE", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn giới tính", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
             }          
             else if(addr.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Vui lòng điền địa chỉ", "NUKE", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Vui lòng điền địa chỉ", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             else{
@@ -463,7 +448,7 @@ public class pnQLNhanVien extends javax.swing.JPanel {
             
             NhanVienDAO nvDAO = new NhanVienDAO();
             NhanVien nv = new NhanVien(name, tel, addr, gender, ngaySinh, salary);
-            nv.setTrangThai(active);
+            
             nv.setMaNV(maNV);
             nv.setUserID(this.currentUserID);
             
@@ -474,20 +459,26 @@ public class pnQLNhanVien extends javax.swing.JPanel {
             
             TaiKhoan tk = new TaiKhoan();
             tk.setTenDangNhap(tel);
-            boolean tkActive = active == 3;
-            tk.setIsActive(tkActive);
+            
             tk.setNguoiDung(nv);
             TaiKhoanDAO tkDAO = new TaiKhoanDAO();
             tkDAO.updateAccount(tk);
             
             JOptionPane.showMessageDialog(this, "Lưu thay đổi thành công", "Hệ thống", JOptionPane.INFORMATION_MESSAGE);
             reloadDataNVTab();
-            cbbState.setEnabled(false);
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Lương không hợp lệ", "Cảnh báo", JOptionPane.ERROR_MESSAGE);
         }
         
-        
+        txtDOB.setText("");
+        txtName.setText("");
+        txtMa.setText("");
+        txtTel.setText("");
+        txtaAddress.setText("");
+        txtSalary.setText("");
+        rdioF.setSelected(false);
+            rdioM.setSelected(false);
     }//GEN-LAST:event_btnSaveActionPerformed
 
     public void reloadDataNVTab(){
@@ -498,7 +489,7 @@ public class pnQLNhanVien extends javax.swing.JPanel {
         tbModel.setRowCount(0);
         
         for(NhanVienFullDTO nvfull : arr){
-            String conLam = nvfull.getNv().getTrangThai() == 3 ? "Đang làm" : nvfull.getNv().getTrangThai() == 2 ? "Đã nghỉ việc" : "";
+        //    String conLam = nvfull.getNv().getTrangThai() == 3 ? "Đang làm" : nvfull.getNv().getTrangThai() == 2 ? "Đã nghỉ việc" : "";
             
             tbModel.addRow( new Object[] {
                 nvfull.getNv().getMaNV(),
@@ -508,7 +499,7 @@ public class pnQLNhanVien extends javax.swing.JPanel {
                 nvfull.getNv().getTel(),
                 nvfull.getNv().getAddress(),
                 nvfull.getTk().getTenDangNhap(),
-                conLam,
+                "Đang làm",
                 nvfull.getNv().getSalary(),
                 nvfull.getNv().getUserID()
             });
@@ -532,11 +523,9 @@ public class pnQLNhanVien extends javax.swing.JPanel {
     private javax.swing.JButton btnModify;
     private javax.swing.JButton btnSave;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cbbState;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

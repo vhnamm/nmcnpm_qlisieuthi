@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -72,6 +73,7 @@ public class frmCustomer extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnOrder = new javax.swing.JButton();
         btnHistory = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
         pnMain = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -119,6 +121,14 @@ public class frmCustomer extends javax.swing.JFrame {
             }
         });
 
+        btnLogout.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnLogout.setText("Đăng xuất");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -126,6 +136,7 @@ public class frmCustomer extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
             .addComponent(btnHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +146,9 @@ public class frmCustomer extends javax.swing.JFrame {
                 .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(btnHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 477, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 334, Short.MAX_VALUE)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92))
         );
 
         // Code adding the component to the parent container - not shown here
@@ -175,9 +188,9 @@ public class frmCustomer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
-        ((pnCustomerOrder) pnMain.getComponent(1)).loadData();
-        ((pnCustomerOrder) pnMain.getComponent(1)).initCbb();
         
+        ((pnCustomerOrder) pnMain.getComponent(1)).loadData();
+        ((pnCustomerOrder) pnMain.getComponent(1)).initOrderInfo();
         cardLayout.show(pnMain, "pnOrder");
         resetColor();
         btnOrder.setBackground(activeBtn);
@@ -190,6 +203,16 @@ public class frmCustomer extends javax.swing.JFrame {
         btnHistory.setBackground(activeBtn);
         this.currentActiveBtn = btnHistory.getText();
     }//GEN-LAST:event_btnHistoryActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        int choice = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn đăng xuất?", "Hệ thống", JOptionPane.YES_NO_OPTION);
+        if(choice == JOptionPane.YES_OPTION){
+            this.dispose();
+            frmLogin login = new frmLogin();
+            login.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
 
     public static void main(String args[]) {
@@ -226,6 +249,7 @@ public class frmCustomer extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHistory;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnOrder;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

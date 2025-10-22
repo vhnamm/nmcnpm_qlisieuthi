@@ -65,12 +65,12 @@ public class NhanVienDAO {
         
         try {
             conn = ConnectDB.getInstance();
-            String sql = "SELECT nv.maNV, nv.userID ,nv.salary ,nv.trangThai,usr.hoTen, usr.tel, usr.address, usr.ngaySinh, "
+            String sql = "SELECT nv.maNV, nv.userID ,nv.salary ,usr.hoTen, usr.tel, usr.address, usr.ngaySinh, "
                     + "usr.gender, tk.tenDangNhap, tk.isActive "
                     + "FROM employees nv "
                     + "INNER JOIN users usr ON nv.userID = usr.ID "
                     + "INNER JOIN accounts tk ON usr.ID = tk.userID "
-                    + "WHERE nv.trangThai <> 0";
+                    + "WHERE tk.isActive <> 0";
             
             pre = conn.prepareStatement(sql);
             rs = pre.executeQuery();
@@ -85,14 +85,14 @@ public class NhanVienDAO {
                 String tdn = rs.getString("tenDangNhap");
                 Boolean active = rs.getBoolean("isActive");
                 String addres = rs.getString("address");
-                int conLam = rs.getInt("trangThai");
+                
                 Double salary = rs.getDouble("salary");
                 int userID = rs.getInt("userID");
                 
                 NhanVien nv = new NhanVien(hoTen, tel, addres, gender, ngaySinh.toLocalDate(), salary);
                 nv.setUserID(userID);
                 nv.setMaNV(maNV);
-                nv.setTrangThai(conLam);
+                
                 TaiKhoan tk = new TaiKhoan();
                 tk.setTenDangNhap(tdn);
                 tk.setIsActive(active);

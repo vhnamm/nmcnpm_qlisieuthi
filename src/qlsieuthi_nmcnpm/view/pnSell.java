@@ -886,10 +886,10 @@ public class pnSell extends javax.swing.JPanel {
             int choice  = JOptionPane.showConfirmDialog(this, "Thanh toán và tạo hoá đơn cho đơn hàng này?", "Hệ thống", JOptionPane.YES_NO_OPTION);
             if(choice == JOptionPane.YES_OPTION){
                 LocalDateTime createdAt = DateConverter.stringToLocalDateTime(lbTimeCreate.getText());
-                int employeeID = Integer.parseInt(txtMaNV.getText().substring(3));
-                int customerID = Integer.parseInt(txtMaKH.getText().substring(3));
+                int employeeID = Integer.parseInt(txtMaNV.getText().substring(2));
+                int customerID = Integer.parseInt(txtMaKH.getText().substring(2));
                 String codes = txtCodes.getText();
-                int state = 2; // Thanh cong
+                int state = 3; // Da thanh toan (Hoan tat)
                 String address = "Tại quầy";
                 double total = SeperatorConvert.thousandFormattedToDouble(lbTotal.getText());
                 double customerPaid = Double.parseDouble(txtPaid.getText().trim());
