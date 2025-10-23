@@ -10,6 +10,8 @@ import qlsieuthi_nmcnpm.models.TaiKhoan;
  * @author ADMIN
  */
 public class NguoiDungDAO {
+
+    
     public int addNguoiDung(NguoiDung nd){
         Connection conn = null;
         PreparedStatement pre = null;
@@ -22,6 +24,7 @@ public class NguoiDungDAO {
             pre.setString(1, nd.getHoTen());
             pre.setString(2, nd.getTel());
             pre.setString(3, nd.getAddress());
+            
             if(nd.getNgaySinh() != null){
                 pre.setDate(4, Date.valueOf(nd.getNgaySinh()));
             }else{

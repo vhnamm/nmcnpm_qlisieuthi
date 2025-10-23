@@ -238,4 +238,40 @@ public class NhanVienDAO {
         }
         return code;
     }
+    
+    public List<NhanVienFullDTO> findEmployeesByName(String name){
+        Connection conn;
+        PreparedStatement pre;
+        ResultSet rs;
+        List<NhanVienFullDTO> list = new ArrayList<>();
+        
+        try {
+            conn = ConnectDB.getInstance();
+            String sql = "SELECT em.maNV, em.salary, user.hoTen, user.tel, user.address, user.ngaySinh, user.gender, tk.tenDangNhap "
+                    + "FROM employees em "
+                    + "INNER JOIN users user ON em.userID  = user.ID "
+                    + "INNER JOIN accounts tk ON user.ID = tk.userID "
+                    + "WHERE LOWER(user.hoTen) LIKE ? AND tk.isActive = true";
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, "%" + name + "%"); 
+            
+            rs = pre.executeQuery();
+            while(rs.next()){
+                NhanVien nv = new NhanVien(rs.getString("hoTen"), rs.getString("tel"), rs.getString("address"), rs.getString("gender"), 
+                        rs.getDate("ngaySinh").toLocalDate(), rs.getDouble("salary"));
+                nv.setMaNV(rs.getString("maNV"));
+                TaiKhoan tk = new TaiKhoan();
+                tk.setTenDangNhap(rs.getString("tenDangNhap"));
+                
+                NhanVienFullDTO nvFullDTO = new NhanVienFullDTO(nv, tk);
+                list.add(nvFullDTO);
+            }
+            ConnectDB.close(conn);
+            pre.close();
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

@@ -23,7 +23,7 @@ public class SupplierDAO {
         
         try {
             conn = ConnectDB.getInstance();
-            String sql = "SELECT * FROM suppliers";
+            String sql = "SELECT * FROM suppliers WHERE isCooperate = true";
             pre = conn.prepareStatement(sql);
             rs = pre.executeQuery();
             
@@ -73,5 +73,45 @@ public class SupplierDAO {
             e.printStackTrace();
         }
         return true;
+    }
+    
+    public void updateSupplier(Supplier sup){
+        Connection conn;
+        PreparedStatement pre;
+        try {
+            conn = ConnectDB.getInstance();
+            String sql = "UPDATE suppliers SET codes = ? , supplierName =?, tel =? WHERE ID  = ?";
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, sup.getCodes());
+            pre.setString(2, sup.getName());
+            pre.setString(3, sup.getTel());
+            pre.setInt(4, sup.getId());
+            
+            pre.executeUpdate();
+            ConnectDB.close(conn);
+            pre.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void deleteSupplier(int supplierID){
+        Connection conn;
+        PreparedStatement pre;
+        try {
+            conn = ConnectDB.getInstance();
+            String sql = "UPDATE suppliers SET isCooperate = false WHERE ID  = ?";
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, supplierID);
+            
+            
+            pre.executeUpdate();
+            ConnectDB.close(conn);
+            pre.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

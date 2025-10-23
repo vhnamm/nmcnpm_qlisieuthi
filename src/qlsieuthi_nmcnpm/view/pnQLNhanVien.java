@@ -121,6 +121,11 @@ public class pnQLNhanVien extends javax.swing.JPanel {
         btnSave.setBounds(400, 10, 90, 40);
 
         btnFind.setText("Tìm kiếm");
+        btnFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindActionPerformed(evt);
+            }
+        });
         pnTool.add(btnFind);
         btnFind.setBounds(990, 10, 100, 30);
         pnTool.add(txtFind);
@@ -219,7 +224,7 @@ public class pnQLNhanVien extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel8.setText("vnđ");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(690, 90, 21, 18);
+        jLabel8.setBounds(690, 90, 40, 18);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setText("Lọc");
@@ -480,6 +485,31 @@ public class pnQLNhanVien extends javax.swing.JPanel {
         rdioF.setSelected(false);
             rdioM.setSelected(false);
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
+        String name = txtFind.getText().trim().toLowerCase();
+        if(name.isEmpty()){
+            reloadDataNVTab();
+        }else{
+            NhanVienDAO nvdao = new NhanVienDAO();
+            arr = nvdao.findEmployeesByName(name);
+            tbModel.setRowCount(0);
+            for(NhanVienFullDTO nvfull : arr){
+                tbModel.addRow(new Object[]{
+                    nvfull.getNv().getMaNV(),
+                    nvfull.getNv().getHoTen(),
+                    nvfull.getNv().getNgaySinh(),
+                    nvfull.getNv().getGender(),
+                    nvfull.getNv().getTel(),
+                    nvfull.getNv().getAddress(),
+                    nvfull.getTk().getTenDangNhap(),
+                    "Đang làm",
+                    nvfull.getNv().getSalary(),
+                    nvfull.getNv().getUserID()
+                });
+            }
+        }
+    }//GEN-LAST:event_btnFindActionPerformed
 
     public void reloadDataNVTab(){
         NhanVienDAO nvDAO = new NhanVienDAO();
