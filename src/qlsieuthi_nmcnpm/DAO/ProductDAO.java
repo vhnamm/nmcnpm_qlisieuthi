@@ -20,7 +20,7 @@ public class ProductDAO {
         ResultSet rs;
         try {
             conn = ConnectDB.getInstance();
-            String sql = "SELECT ID from products WHERE productName = ? AND categoryID = ?";
+            String sql = "SELECT ID from products WHERE productName = ? AND categoryID = ? WHERE state <> 0";
             pre = conn.prepareStatement(sql);
             pre.setString(1, prod.getName());
             pre.setInt(2, prod.getCategoryID());
@@ -115,7 +115,53 @@ public class ProductDAO {
         }
         return list;
     }
-    
+    public List<Product> getAllOrderableProducts(){
+        Connection conn;
+        PreparedStatement pre;
+        ResultSet rs;
+        List<Product> list = new ArrayList<>();
+        try {
+            conn = ConnectDB.getInstance();
+            String sql = "SELECT prod.ID, prod.productName, prod.codes, prod.unit, prod.descriptions, prod.storeQuantity, prod.importAvrg, "
+                    + "prod.sellPrice, prod.state, prod.img, cat.categoryName, cat.ID AS categoryID "
+                    + "FROM products prod "
+                    + "INNER JOIN categories cat "
+                    + "ON prod.categoryID = cat.ID "
+                    + "WHERE state = 2 "
+                    + "ORDER BY prod.ID ASC";
+            
+            pre = conn.prepareStatement(sql);
+            rs = pre.executeQuery();
+            
+            while(rs.next()){
+                int id = rs.getInt("ID");
+                String name = rs.getString("productName");
+                String codes = rs.getString("codes");
+                String unit = rs.getString("unit");
+                
+                String des = rs.getString("descriptions");
+                int quan = rs.getInt("storeQuantity");
+                double importAvrg = rs.getDouble("importAvrg");
+                double sellPrice = rs.getDouble("sellPrice");
+                int state = rs.getInt("state");
+                byte[] img = rs.getBytes("img");
+                
+                Product prod = new Product(name, unit, rs.getInt("categoryID"), des, quan, importAvrg, sellPrice, state, img);
+                prod.setCodes(codes);
+                prod.setId(id);
+                
+                prod.setCategoryName(rs.getString("categoryName"));
+                list.add(prod);
+            }
+            ConnectDB.close(conn);
+            rs.close();
+            pre.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
     public void updateProduct(Product prod){
         Connection conn;
         PreparedStatement pre;
@@ -249,10 +295,10 @@ public class ProductDAO {
             String sql;
             
             if(categoryID != 0){
-                sql = orderBy == null ? "SELECT * FROM products WHERE categoryID = ? ORDER BY ID ASC" : "SELECT * FROM products WHERE categoryID = ? ORDER BY sellPrice " + orderBy;
+                sql = orderBy == null ? "SELECT * FROM products WHERE categoryID = ? AND state = 2 ORDER BY ID ASC" : "SELECT * FROM products WHERE categoryID = ? AND state = 2 ORDER BY sellPrice " + orderBy;
                 
             }else{//khi người dùng chọn lọc theo tất cả sản phẩm nhưng sắp xếp giá theo tăng hoặc giảm
-                sql = orderBy == null ? "SELECT * FROM products ORDER BY ID ASC" : "SELECT * FROM products ORDER BY sellPrice " + orderBy;
+                sql = orderBy == null ? "SELECT * FROM products WHERE state = 2 ORDER BY ID ASC" : "SELECT * FROM products WHERE state = 2 ORDER BY sellPrice " + orderBy;
             }
             
             pre = conn.prepareStatement(sql);

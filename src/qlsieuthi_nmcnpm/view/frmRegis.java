@@ -187,8 +187,8 @@ public class frmRegis extends javax.swing.JFrame {
         if(name.isEmpty()){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập tên", "Hệ thống", JOptionPane.INFORMATION_MESSAGE);
             return;
-        }else if(tel.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên đăng nhập", "Hệ thống", JOptionPane.INFORMATION_MESSAGE);
+        }else if(tel.length() != 10 && !tel.startsWith("0")){
+            JOptionPane.showMessageDialog(this, "Số điện thoại không hợp lệ", "Hệ thống", JOptionPane.INFORMATION_MESSAGE);
             return;
         }else if(pass.isEmpty()){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập mật khẩu", "Hệ thống", JOptionPane.INFORMATION_MESSAGE);

@@ -294,6 +294,8 @@ public class frmQuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQLNCCActionPerformed
 
     private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
+        
+        cardLayout.show(pnMain, "pnStatistic");
         resetColor();
         btnThongKe.setBackground(activeBtn);
         isActive = btnThongKe.getText();
@@ -320,6 +322,7 @@ public class frmQuanLy extends javax.swing.JFrame {
         pnMain.add(new pnProduct(), "qlsp") ;
         pnMain.add(new pnImport(), "qlnhap") ;
         pnMain.add(new pnSupplier(), "qlncc");
+        pnMain.add(new pnStatistic(), "pnStatistic");
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

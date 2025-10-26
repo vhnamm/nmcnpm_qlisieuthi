@@ -79,15 +79,16 @@ public class OrderDAO {
         }
     }
     
-    public List<Order> getPendingOrders(){
+    public List<Order> getOrdersByState(int state){
         List<Order> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement pre = null;
         ResultSet rs = null;
         try {
             conn = ConnectDB.getInstance();
-            String sql = "SELECT codes, address, times, finalTotal FROM orders WHERE state = 1 ORDER BY times ASC";
+            String sql = "SELECT codes, address, times, finalTotal FROM orders WHERE state = ? ORDER BY times ASC";
             pre = conn.prepareStatement(sql);
+            pre.setInt(1, state);
             rs = pre.executeQuery();
             while(rs.next()){
                 Order od = new Order();
@@ -170,16 +171,16 @@ public class OrderDAO {
         
     }
     
-    public void updateOrderStatus(int orderID, int status){
+    public void updateOrderStatus(int orderID, int status, int employeeID){
         Connection conn = null;
         PreparedStatement pre = null;
         try {
             conn= ConnectDB.getInstance();
-            String sql = "UPDATE orders SET state = ? WHERE ID = ?";
+            String sql = "UPDATE orders SET state = ?, employeeID = ? WHERE ID = ?";
             pre = conn.prepareStatement(sql);
             pre.setInt(1, status);
-            pre.setInt(2, orderID);
-            
+            pre.setInt(2, employeeID);
+            pre.setInt(3, orderID);
             pre.executeUpdate();
             
         } catch (SQLException e) {

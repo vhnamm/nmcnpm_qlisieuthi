@@ -4,12 +4,23 @@
  */
 package qlsieuthi_nmcnpm.view;
 
+import java.awt.Color;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.table.DefaultTableModel;
+import qlsieuthi_nmcnpm.DAO.ReceiptDAO;
+import qlsieuthi_nmcnpm.helper.SeperatorConvert;
+import qlsieuthi_nmcnpm.helper.ThousandSeperator;
+import qlsieuthi_nmcnpm.models.Receipt;
+
 /**
  *
  * @author Admin
  */
 public class pnStatistic extends javax.swing.JPanel {
-
+    private DefaultTableModel tbModel;
+    private DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    
     /**
      * Creates new form pnStatistic
      */
@@ -26,19 +37,308 @@ public class pnStatistic extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tabbedMain = new javax.swing.JTabbedPane();
+        pnOverview = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        pnReceiptStatistic = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbReceipt = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        lbTotal = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        lbQty = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel9 = new javax.swing.JLabel();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
+
+        tabbedMain.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tabbedMain.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabbedMainStateChanged(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel1.setText("Thống kê tổng quan");
+
+        javax.swing.GroupLayout pnOverviewLayout = new javax.swing.GroupLayout(pnOverview);
+        pnOverview.setLayout(pnOverviewLayout);
+        pnOverviewLayout.setHorizontalGroup(
+            pnOverviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnOverviewLayout.createSequentialGroup()
+                .addGap(477, 477, 477)
+                .addComponent(jLabel1)
+                .addContainerGap(390, Short.MAX_VALUE))
+        );
+        pnOverviewLayout.setVerticalGroup(
+            pnOverviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnOverviewLayout.createSequentialGroup()
+                .addGap(342, 342, 342)
+                .addComponent(jLabel1)
+                .addContainerGap(427, Short.MAX_VALUE))
+        );
+
+        tabbedMain.addTab("Tổng Quan", pnOverview);
+
+        tbReceipt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tbReceipt.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã phiếu", "Thời gian", "Tổng tiền"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbReceipt.setRowHeight(30);
+        jScrollPane1.setViewportView(tbReceipt);
+        tbReceipt.getColumnModel().getColumn(2).setCellRenderer(new ThousandSeperator());
+
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Tổng tiền nhập");
+
+        lbTotal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbTotal.setForeground(new java.awt.Color(255, 255, 255));
+        lbTotal.setText("0");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("đ");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(144, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addGap(73, 73, 73))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbTotal)
+                    .addComponent(jLabel5))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel2)
+                .addGap(37, 37, 37))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setText("Chi Tiết Phiếu Nhập");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(210, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addGap(196, 196, 196))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(204, 102, 0));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Đơn nhập tháng này");
+
+        lbQty.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbQty.setForeground(new java.awt.Color(255, 255, 255));
+        lbQty.setText("0");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbQty)
+                    .addComponent(jLabel3))
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(lbQty)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel3)
+                .addGap(39, 39, 39))
+        );
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel8.setText("Từ ngày");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel9.setText("Đến");
+
+        jButton1.setText("Tìm kiếm");
+
+        javax.swing.GroupLayout pnReceiptStatisticLayout = new javax.swing.GroupLayout(pnReceiptStatistic);
+        pnReceiptStatistic.setLayout(pnReceiptStatisticLayout);
+        pnReceiptStatisticLayout.setHorizontalGroup(
+            pnReceiptStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnReceiptStatisticLayout.createSequentialGroup()
+                .addGroup(pnReceiptStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnReceiptStatisticLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel8)
+                        .addGap(33, 33, 33)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnReceiptStatisticLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnReceiptStatisticLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnReceiptStatisticLayout.setVerticalGroup(
+            pnReceiptStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnReceiptStatisticLayout.createSequentialGroup()
+                .addGroup(pnReceiptStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnReceiptStatisticLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnReceiptStatisticLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(pnReceiptStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
+                        .addGroup(pnReceiptStatisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel8)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+
+        tabbedMain.addTab("Phiếu Nhập", pnReceiptStatistic);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(tabbedMain)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(tabbedMain)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tabbedMainStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabbedMainStateChanged
+        int tab = tabbedMain.getSelectedIndex();
+        switch (tab) {
+            case 0:
+                
+                break;
+            case 1:
+                loadData();
+                return;
+            default:
+                throw new AssertionError();
+        }
+    }//GEN-LAST:event_tabbedMainStateChanged
 
+    public void loadData(){
+        tbModel = (DefaultTableModel) tbReceipt.getModel();
+        tbModel.setRowCount(0);
+        ReceiptDAO receiptDAO = new ReceiptDAO();
+        double total = 0;
+        int cntThisMonth = 0;
+        
+        for(Receipt rc : receiptDAO.getAllReceipts()){
+            double amount = rc.getTotal();
+            String formattedDate =  rc.getImportDate().format(fmt);
+            int importMonth = rc.getImportDate().getMonthValue();
+            tbModel.addRow(new Object[]{
+                rc.getCodes(),
+                formattedDate,
+                amount
+            });
+            System.out.println(formattedDate);
+            
+            LocalDate now = LocalDate.now();
+            
+            if(now.getMonthValue() == importMonth) ++cntThisMonth;
+            
+            total += amount;
+        }
+        lbTotal.setText(SeperatorConvert.doubleToThousandFormatted(total));
+        lbQty.setText(String.valueOf(cntThisMonth));
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbQty;
+    private javax.swing.JLabel lbTotal;
+    private javax.swing.JPanel pnOverview;
+    private javax.swing.JPanel pnReceiptStatistic;
+    private javax.swing.JTabbedPane tabbedMain;
+    private javax.swing.JTable tbReceipt;
     // End of variables declaration//GEN-END:variables
 }

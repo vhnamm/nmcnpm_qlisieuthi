@@ -4,6 +4,10 @@
  */
 package qlsieuthi_nmcnpm.DAO;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import qlsieuthi_nmcnpm.ConnectUtil.ConnectDB;
 import qlsieuthi_nmcnpm.models.Receipt;
 
@@ -66,5 +70,35 @@ public class ReceiptDAO {
         
         return id;
     
+    }
+    
+    public List<Receipt> getAllReceipts(){
+        Connection conn = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+        List<Receipt> list = new ArrayList<>();
+        
+        try {
+            conn = ConnectDB.getInstance();
+            String sql = "SELECT * FROM receipts ORDER BY importDate DESC";
+            pre = conn.prepareStatement(sql);
+            rs = pre.executeQuery();
+            while(rs.next()){
+                Receipt rc = new Receipt(rs.getString("codes"), rs.getInt("managerID"), rs.getInt("supplierID"), rs.getDate("importDate").toLocalDate(), rs.getDouble("total"));
+                list.add(rc);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally{
+            try {
+                ConnectDB.close(conn);
+                pre.close();
+                rs.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ReceiptDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return list;
     }
 }

@@ -112,6 +112,7 @@ public class pnQLNhanVien extends javax.swing.JPanel {
 
         btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSave.setText("Lưu");
+        btnSave.setEnabled(false);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -277,8 +278,8 @@ public class pnQLNhanVien extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Vui lòng điền tên nhân viên", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            else if(tel.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Vui lòng điền SĐT", "Hệ thống", JOptionPane.WARNING_MESSAGE);
+            else if(tel.length() != 10 && !tel.startsWith("0")){
+                JOptionPane.showMessageDialog(this, "SDT không hợp lệ", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             else if(gender.equals("")){
@@ -408,7 +409,7 @@ public class pnQLNhanVien extends javax.swing.JPanel {
             if(gender.equals("Nam")) rdioM.setSelected(true);
             else if(gender.equals("Nữ")) rdioF.setSelected(true);
             
-            
+            btnSave.setEnabled(true);
         }
     }//GEN-LAST:event_btnModifyActionPerformed
 
@@ -428,8 +429,8 @@ public class pnQLNhanVien extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Vui lòng điền tên nhân viên", "Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            else if(tel.isEmpty()){
-                JOptionPane.showMessageDialog(this, "Vui lòng điền SĐT", "Hệ thống", JOptionPane.WARNING_MESSAGE);
+            else if(tel.length() != 10 && !tel.startsWith("0")){
+                JOptionPane.showMessageDialog(this, "SDT không hợp lệ" ,"Hệ thống", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             else if(gender.equals("")){
@@ -484,6 +485,7 @@ public class pnQLNhanVien extends javax.swing.JPanel {
         txtSalary.setText("");
         rdioF.setSelected(false);
             rdioM.setSelected(false);
+            btnSave.setEnabled(false);
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed

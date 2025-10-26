@@ -9,13 +9,16 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import qlsieuthi_nmcnpm.DAO.CustomerDAO;
+import qlsieuthi_nmcnpm.DAO.NhanVienDAO;
 import qlsieuthi_nmcnpm.DAO.OrderDAO;
 import qlsieuthi_nmcnpm.DAO.ProductDAO;
 import qlsieuthi_nmcnpm.DTO.OrderDetailDTO;
 import qlsieuthi_nmcnpm.DTO.OrderFullDTO;
 import qlsieuthi_nmcnpm.helper.SeperatorConvert;
+import qlsieuthi_nmcnpm.helper.Session;
 import qlsieuthi_nmcnpm.helper.ThousandSeperator;
 import qlsieuthi_nmcnpm.models.Order;
+import qlsieuthi_nmcnpm.models.TaiKhoan;
 
 
 public class pnPendingOrder extends javax.swing.JPanel {
@@ -23,6 +26,7 @@ public class pnPendingOrder extends javax.swing.JPanel {
     private List<Order> list;
     private DefaultTableModel tbModel;
     private DefaultTableModel tbSummaryModel;
+    private DefaultTableModel tbAcceptedModel;
     
     private final DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     public pnPendingOrder() {
@@ -84,6 +88,11 @@ public class pnPendingOrder extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         pnAccepted = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tbAccepted = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         tabbedMain.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tabbedMain.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -321,7 +330,7 @@ public class pnPendingOrder extends javax.swing.JPanel {
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnPendingLayout.setVerticalGroup(
@@ -344,16 +353,44 @@ public class pnPendingOrder extends javax.swing.JPanel {
 
         tabbedMain.addTab("Đơn hàng đang chờ", pnPending);
 
-        javax.swing.GroupLayout pnAcceptedLayout = new javax.swing.GroupLayout(pnAccepted);
-        pnAccepted.setLayout(pnAcceptedLayout);
-        pnAcceptedLayout.setHorizontalGroup(
-            pnAcceptedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1315, Short.MAX_VALUE)
-        );
-        pnAcceptedLayout.setVerticalGroup(
-            pnAcceptedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 822, Short.MAX_VALUE)
-        );
+        pnAccepted.setLayout(null);
+
+        tbAccepted.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã đơn", "Địa chỉ", "Thời gian", "Tổng tiền", "Trạng thái"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tbAccepted);
+
+        pnAccepted.add(jScrollPane4);
+        jScrollPane4.setBounds(6, 111, 801, 705);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPanel2.setLayout(null);
+
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton3.setText("Xác nhận thanh toán");
+        jPanel2.add(jButton3);
+        jButton3.setBounds(110, 660, 274, 48);
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setText("Thông tin đơn hàng");
+        jPanel2.add(jLabel6);
+        jLabel6.setBounds(140, 20, 240, 30);
+
+        pnAccepted.add(jPanel2);
+        jPanel2.setBounds(820, 10, 490, 800);
 
         tabbedMain.addTab("Đã xác nhận", pnAccepted);
 
@@ -376,7 +413,7 @@ public class pnPendingOrder extends javax.swing.JPanel {
                 loadPendingData();
                 break;
             case 1:
-                System.out.println("tab accepted");
+                loadAcceptedData();
                 break;
             default:
                 throw new AssertionError();
@@ -388,7 +425,11 @@ public class pnPendingOrder extends javax.swing.JPanel {
         if(choice == JOptionPane.YES_OPTION){
             int orderID = Integer.parseInt(txtPendingCode.getText().substring(2));
             OrderDAO orderDAO = new OrderDAO();
-            orderDAO.updateOrderStatus(orderID, 2); // Da xac nhan
+            int userID = Session.getCurrentTk().getUserID();
+            NhanVienDAO nhanVienDAO = new NhanVienDAO();
+            int employeeID = Integer.parseInt(nhanVienDAO.getCodesNhanVien(userID).substring(2));
+            
+            orderDAO.updateOrderStatus(orderID, 2, employeeID); // Da xac nhan
             
             ProductDAO productDAO = new ProductDAO();
             for(int i=0; i<tbOrderSummary.getRowCount(); i++){
@@ -420,7 +461,7 @@ public class pnPendingOrder extends javax.swing.JPanel {
 
     public void loadPendingData(){
         OrderDAO orderDAO = new OrderDAO();
-        list = orderDAO.getPendingOrders();
+        list = orderDAO.getOrdersByState(1);
         tbModel = (DefaultTableModel) tbPending.getModel();
         
         tbModel.setRowCount(0);
@@ -434,6 +475,26 @@ public class pnPendingOrder extends javax.swing.JPanel {
             });
         }
         tbPending.setModel(tbModel);
+    }
+    
+    public void loadAcceptedData(){
+        OrderDAO orderDAO = new OrderDAO();
+        List<Order> arr = orderDAO.getOrdersByState(2);
+        tbAcceptedModel = (DefaultTableModel) tbAccepted.getModel();
+        
+        tbAcceptedModel.setRowCount(0);
+        
+        for(Order od : arr){
+            tbAcceptedModel.addRow(new Object[]{
+                od.getCodes(),
+                od.getAddress(),
+                
+                od.getTimes().format(fmt),
+                od.getFinalTotal(),
+                "Chờ thanh toán"
+            });
+        }
+        tbAccepted.setModel(tbAcceptedModel);
     }
     public void clearUI(){
         tbSummaryModel.setRowCount(0);
@@ -495,6 +556,7 @@ public class pnPendingOrder extends javax.swing.JPanel {
     private javax.swing.JButton btnAccept;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -509,13 +571,16 @@ public class pnPendingOrder extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbFinalTotal;
     private javax.swing.JLabel lbSale;
@@ -523,6 +588,7 @@ public class pnPendingOrder extends javax.swing.JPanel {
     private javax.swing.JPanel pnAccepted;
     private javax.swing.JPanel pnPending;
     private javax.swing.JTabbedPane tabbedMain;
+    private javax.swing.JTable tbAccepted;
     private javax.swing.JTable tbOrderSummary;
     private javax.swing.JTable tbPending;
     private javax.swing.JTextArea txtAddress;

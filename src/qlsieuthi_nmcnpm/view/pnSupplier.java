@@ -416,8 +416,8 @@ public class pnSupplier extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(dialogEditSupp, "Vui lòng điền tên NCC", "Hệ thống", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        else if(tel.isEmpty()){
-            JOptionPane.showMessageDialog(dialogEditSupp, "Vui lòng điền SĐT", "Hệ thống", JOptionPane.WARNING_MESSAGE);
+        else if(tel.length() != 10 && !tel.startsWith("0")){
+            JOptionPane.showMessageDialog(dialogEditSupp, "SDT không hợp lệ", "Hệ thống", JOptionPane.WARNING_MESSAGE);
             return;
         }
         else if(codes.isEmpty()){
@@ -502,7 +502,7 @@ public class pnSupplier extends javax.swing.JPanel {
         }else if(name.isEmpty()){
             JOptionPane.showMessageDialog(dialogModify, "Ten nha cung cap khong duoc trong");
             return;
-        }else if(tel.isEmpty() || tel.length() < 10){
+        }else if(tel.length() != 10 && !tel.startsWith("0")){
             JOptionPane.showMessageDialog(dialogModify, "So dien thoai khong hop le");
             return;
         }else if(address.isEmpty()){
