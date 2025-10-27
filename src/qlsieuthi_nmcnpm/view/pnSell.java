@@ -883,6 +883,10 @@ public class pnSell extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Chưa có thông tin khách hàng", "Hệ thống", JOptionPane.WARNING_MESSAGE);
             
         }else{
+            if(tbOrder.getRowCount() == 0){
+                JOptionPane.showMessageDialog(this, "Chưa có sản phẩm trong giỏ, không thể thanh toán!");
+                return;
+            }
             int choice  = JOptionPane.showConfirmDialog(this, "Thanh toán và tạo hoá đơn cho đơn hàng này?", "Hệ thống", JOptionPane.YES_NO_OPTION);
             if(choice == JOptionPane.YES_OPTION){
                 LocalDateTime createdAt = DateConverter.stringToLocalDateTime(lbTimeCreate.getText());
@@ -953,12 +957,15 @@ public class pnSell extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm", "Hệ thống", JOptionPane.INFORMATION_MESSAGE);
         }else{
             int qty =(Integer) spinnerQty.getValue();
+            String codes = tbProduct.getValueAt(row, 0).toString();
             
-            if(qty >(Integer)tbProduct.getValueAt(row, 2)){
+            ProductDAO productDAO = new ProductDAO();
+            
+            if(!productDAO.checkStoreQty(Integer.parseInt(codes.substring(2)), qty)){
                 JOptionPane.showMessageDialog(this, "Không đủ số lượng mặt hàng này", "Hệ thống", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
-            String codes = tbProduct.getValueAt(row, 0).toString();
+            
             String name = tbProduct.getValueAt(row, 1).toString();
             double price  = (Double) tbProduct.getValueAt(row, 3);
             
@@ -1004,6 +1011,15 @@ public class pnSell extends javax.swing.JPanel {
         if(choice == JOptionPane.YES_OPTION){
             int qtyModified = (Integer)spinnerModifyQty.getValue();
             int row = tbOrder.getSelectedRow();
+            int productID = Integer.parseInt(tbOrder.getValueAt(row, 0).toString().substring(2));
+            ProductDAO productDAO = new ProductDAO();
+            
+            if(!productDAO.checkStoreQty(productID, qtyModified)){
+                JOptionPane.showMessageDialog(dialogModify, "Không đủ số lượng hàng trong kho");
+                return;
+            }
+            
+            
             double thanhTien = qtyModified * (Double)tbOrder.getValueAt(row, 3);
             tbOrderModel.setValueAt(qtyModified, row , 2);
             

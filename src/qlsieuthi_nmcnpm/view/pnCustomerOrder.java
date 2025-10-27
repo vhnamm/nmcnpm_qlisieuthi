@@ -139,8 +139,8 @@ public class pnCustomerOrder extends javax.swing.JPanel {
         spinnerQty = new javax.swing.JSpinner();
         btnAddToCart = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        txtFind = new javax.swing.JTextField();
+        btnFind = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         cbbCategory = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
@@ -326,7 +326,7 @@ public class pnCustomerOrder extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Tên người đặt");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(20, 90, 93, 20);
+        jLabel5.setBounds(20, 90, 100, 20);
 
         txtName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtName.setEnabled(false);
@@ -337,7 +337,7 @@ public class pnCustomerOrder extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("SĐT");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(350, 90, 26, 20);
+        jLabel6.setBounds(350, 90, 50, 20);
 
         txtTel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtTel.setEnabled(false);
@@ -374,7 +374,7 @@ public class pnCustomerOrder extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("Mã đơn");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(20, 40, 51, 20);
+        jLabel9.setBounds(20, 40, 60, 20);
 
         txtInvoiceCode.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtInvoiceCode.setEnabled(false);
@@ -454,17 +454,17 @@ public class pnCustomerOrder extends javax.swing.JPanel {
         jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel22.setText("TỔNG TIỀN");
         jPanel1.add(jLabel22);
-        jLabel22.setBounds(100, 610, 108, 27);
+        jLabel22.setBounds(100, 610, 130, 27);
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel23.setText("CHIẾT KHẤU");
         jPanel1.add(jLabel23);
-        jLabel23.setBounds(100, 660, 118, 27);
+        jLabel23.setBounds(100, 660, 140, 27);
 
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel24.setText("THÀNH TIỀN");
         jPanel1.add(jLabel24);
-        jLabel24.setBounds(100, 710, 123, 27);
+        jLabel24.setBounds(100, 710, 140, 27);
 
         lbTotal.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         lbTotal.setText("0");
@@ -500,17 +500,17 @@ public class pnCustomerOrder extends javax.swing.JPanel {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel15.setText("đ");
         jPanel1.add(jLabel15);
-        jLabel15.setBounds(440, 620, 8, 20);
+        jLabel15.setBounds(440, 620, 20, 20);
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel16.setText("đ");
         jPanel1.add(jLabel16);
-        jLabel16.setBounds(440, 670, 8, 20);
+        jLabel16.setBounds(440, 670, 30, 20);
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel17.setText("đ");
         jPanel1.add(jLabel17);
-        jLabel17.setBounds(440, 720, 8, 20);
+        jLabel17.setBounds(440, 720, 20, 20);
 
         spinnerQty.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         spinnerQty.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
@@ -526,10 +526,15 @@ public class pnCustomerOrder extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nhập số lượng");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setPreferredSize(new java.awt.Dimension(71, 30));
+        txtFind.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtFind.setPreferredSize(new java.awt.Dimension(71, 30));
 
-        jButton2.setText("Tìm kiếm");
+        btnFind.setText("Tìm kiếm");
+        btnFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel3.setText("Bộ lọc");
@@ -569,9 +574,9 @@ public class pnCustomerOrder extends javax.swing.JPanel {
                                 .addComponent(jLabel11))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(17, 17, 17)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnFind, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -610,8 +615,8 @@ public class pnCustomerOrder extends javax.swing.JPanel {
                             .addComponent(jLabel11)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnFind, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -663,7 +668,23 @@ public class pnCustomerOrder extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_cbbOrderByItemStateChanged
-
+    public void applyFilter(){
+        String orderBy = String.valueOf(cbbOrderBy.getSelectedItem());
+        int categoryID = ((Category)cbbCategory.getSelectedItem()).getId();
+            switch (orderBy) {
+                case "Giá giảm dần":
+                    filterData(categoryID, "DESC");
+                    break;
+                case "Giá tăng dần":
+                    filterData(categoryID, "ASC");
+                    break;
+                case "Mặc định":
+                    filterData(categoryID, null);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+    }
     private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
         int row = tbProduct.getSelectedRow();
         if(row == -1){
@@ -804,6 +825,10 @@ public class pnCustomerOrder extends javax.swing.JPanel {
              JOptionPane.showMessageDialog(this, "Chưa nhập địa chỉ");
              return;
          }
+         if(tbCart.getRowCount() == 0){
+             JOptionPane.showMessageDialog(this, "Chưa có mặt hàng nào trong giỏ hàng!");
+             return;
+         }
         String orderCode = txtInvoiceCode.getText();
         int customerID = Integer.parseInt(txtCustomerCode.getText().substring(2));
         LocalDateTime thoiGianTao = LocalDateTime.now();
@@ -835,23 +860,31 @@ public class pnCustomerOrder extends javax.swing.JPanel {
         clearUI();
     }//GEN-LAST:event_btnOrderActionPerformed
 
-    public void applyFilter(){
-        String orderBy = String.valueOf(cbbOrderBy.getSelectedItem());
-        int categoryID = ((Category)cbbCategory.getSelectedItem()).getId();
-            switch (orderBy) {
-                case "Giá giảm dần":
-                    filterData(categoryID, "DESC");
-                    break;
-                case "Giá tăng dần":
-                    filterData(categoryID, "ASC");
-                    break;
-                case "Mặc định":
-                    filterData(categoryID, null);
-                    break;
-                default:
-                    throw new AssertionError();
+    private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
+        triggerChangeTableData = false; // khi set selected cho Combobox thi ko tu chay su kien stateChanged
+        String key = txtFind.getText().trim();
+        if(key.isEmpty()){
+            filterData(0, null);
+        }else{
+            ProductDAO productDAO = new ProductDAO();
+            tbProductModel.setRowCount(0);
+            
+            for(Product prod : productDAO.getSearchedProducts(key)){
+                tbProductModel.addRow(new Object[]{
+                    prod.getCodes(),
+                    prod.getName(),
+                    prod.getUnit(),
+                    prod.getSellPrice(),
+                    ImageConvert.getByteToImageIcon(prod.getImg(), 70, 70)
+                });
             }
-    }
+        }
+        cbbCategory.setSelectedIndex(0);
+        cbbOrderBy.setSelectedIndex(0);
+        triggerChangeTableData = true;
+    }//GEN-LAST:event_btnFindActionPerformed
+
+    
     public void clearUI(){
         tbCartModel.setRowCount(0);
         total = 0;
@@ -867,6 +900,7 @@ public class pnCustomerOrder extends javax.swing.JPanel {
     private javax.swing.JButton btnCancelModify;
     private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnFind;
     private javax.swing.JButton btnOrder;
     private javax.swing.JButton btnRedeem;
     private javax.swing.JButton btnSave;
@@ -876,7 +910,6 @@ public class pnCustomerOrder extends javax.swing.JPanel {
     private javax.swing.JDialog dialogModify;
     private javax.swing.JDialog dialogRedeem;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -906,7 +939,6 @@ public class pnCustomerOrder extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbFinalTotal;
     private javax.swing.JLabel lbSale;
     private javax.swing.JLabel lbTotal;
@@ -917,6 +949,7 @@ public class pnCustomerOrder extends javax.swing.JPanel {
     private javax.swing.JTable tbProduct;
     private javax.swing.JTextArea txtAddress;
     private javax.swing.JTextField txtCustomerCode;
+    private javax.swing.JTextField txtFind;
     private javax.swing.JTextField txtInvoiceCode;
     private javax.swing.JButton txtModify;
     private javax.swing.JTextField txtName;

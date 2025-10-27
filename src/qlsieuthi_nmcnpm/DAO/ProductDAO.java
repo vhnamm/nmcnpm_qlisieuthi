@@ -20,11 +20,11 @@ public class ProductDAO {
         ResultSet rs;
         try {
             conn = ConnectDB.getInstance();
-            String sql = "SELECT ID from products WHERE productName = ? AND categoryID = ? WHERE state <> 0";
+            String sql = "SELECT ID from products WHERE productName = ? AND categoryID = ? AND state = ?";
             pre = conn.prepareStatement(sql);
             pre.setString(1, prod.getName());
             pre.setInt(2, prod.getCategoryID());
-            
+            pre.setBoolean(3, true);
             rs  = pre.executeQuery();
             if(rs.next()){
                 return false;
@@ -353,5 +353,33 @@ public class ProductDAO {
             e.printStackTrace();
         }
         return true;
+    }
+    
+    public List<Product> getSearchedProducts(String keyword){
+        Connection conn = null;
+        PreparedStatement pre = null;
+        ResultSet rs = null;
+        List<Product> list = new ArrayList<>();
+        
+        try {
+            conn = ConnectDB.getInstance();
+            String sql = "SELECT codes, productName, unit, sellPrice, img FROM products WHERE productName LIKE ? ORDER BY ID ASC";
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, "%" + keyword + "%");
+            rs = pre.executeQuery();
+            while(rs.next()){
+                Product prod = new Product();
+                prod.setCodes(rs.getString("codes"));
+                prod.setName(rs.getString("productName"));
+                prod.setUnit(rs.getString("unit"));
+                prod.setSellPrice(rs.getDouble("sellPrice"));
+                prod.setImg(rs.getBytes("img"));
+                
+                list.add(prod);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }
