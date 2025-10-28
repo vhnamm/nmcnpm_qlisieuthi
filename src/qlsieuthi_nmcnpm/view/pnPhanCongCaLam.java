@@ -261,12 +261,12 @@ public class pnPhanCongCaLam extends javax.swing.JPanel {
         }
         int choice = JOptionPane.showConfirmDialog(this, "Tạo ca làm cho những nhân viên này?", "Hệ thống", JOptionPane.YES_NO_OPTION);
         if(choice == JOptionPane.YES_OPTION){
-                NhanVienDAO nvdao = new NhanVienDAO();
+                
                 int shiftID = -1;
                 LocalDate ngayLam;
 
                 for(int row = 0; row < tbPhieuModel.getRowCount(); row++){
-                    int empID = nvdao.getIdNhanVien(tbPhieuModel.getValueAt(row, 0).toString());
+                    int empID = Integer.parseInt(tbPhieuModel.getValueAt(row, 0).toString().substring(2));
                     shiftID = Integer.parseInt(tbPhieuModel.getValueAt(row, 5).toString());
                     ngayLam = (LocalDate) tbPhieuModel.getValueAt(row, 3);
 

@@ -111,13 +111,11 @@ public class pnProduct extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         txtFind = new javax.swing.JTextField();
         btnFind = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProducts = new javax.swing.JTable();
 
         dialogProduct.setMinimumSize(new java.awt.Dimension(1187, 719));
         dialogProduct.setModal(true);
-        dialogProduct.setPreferredSize(new java.awt.Dimension(1187, 719));
         dialogProduct.getContentPane().setLayout(null);
 
         jPanel2.setBackground(new Color(61, 74, 89));
@@ -286,6 +284,11 @@ public class pnProduct extends javax.swing.JPanel {
         pnImage.setBounds(830, 120, 240, 260);
 
         btnSave.setText("Thêm sản phẩm");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
         dialogProduct.getContentPane().add(btnSave);
         btnSave.setBounds(980, 580, 120, 40);
         btnSave.addActionListener((evt) -> {
@@ -428,10 +431,6 @@ public class pnProduct extends javax.swing.JPanel {
         btnFind.setText("Tìm Kiếm");
         jPanel1.add(btnFind);
         btnFind.setBounds(1050, 10, 100, 40);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(610, 10, 130, 40);
 
         tbProducts.setAutoCreateRowSorter(true);
         tbProducts.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -674,6 +673,7 @@ public class pnProduct extends javax.swing.JPanel {
     }//GEN-LAST:event_btnModifyActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
         int row = tbProducts.getSelectedRow();
         if(row == -1){
             JOptionPane.showMessageDialog(this, "Vui lòng chọn nhân viên cần xoá", "Hệ thống", JOptionPane.WARNING_MESSAGE);
@@ -725,6 +725,10 @@ public class pnProduct extends javax.swing.JPanel {
         dialogAddCate.setVisible(false);
         txtCategory.setText("");
     }//GEN-LAST:event_btnSaveCateActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveActionPerformed
     
     public void reloadData(){
         tbModel = (DefaultTableModel)tbProducts.getModel();
@@ -794,7 +798,6 @@ public class pnProduct extends javax.swing.JPanel {
     private javax.swing.JComboBox<Category> cbbCate;
     private javax.swing.JDialog dialogAddCate;
     private javax.swing.JDialog dialogProduct;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

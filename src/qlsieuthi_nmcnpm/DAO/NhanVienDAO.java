@@ -119,7 +119,7 @@ public class NhanVienDAO {
         PreparedStatement pre = null;
         try {
             conn = ConnectDB.getInstance();
-            String sql = "UPDATE employees SET trangThai = 0 WHERE maNV = ?";
+            String sql = "UPDATE employees SET trangThai = false WHERE maNV = ?";
             pre = conn.prepareStatement(sql);
             
             pre.setString(1, nv.getMaNV());
