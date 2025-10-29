@@ -233,7 +233,12 @@ public class pnProduct extends javax.swing.JPanel {
         radioOn.setBounds(420, 430, 125, 21);
 
         radioGroup.add(radioOff);
-        radioOff.setText("Đã ngừng bán");
+        radioOff.setText("Tạm dừng bán");
+        radioOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioOffActionPerformed(evt);
+            }
+        });
         dialogProduct.getContentPane().add(radioOff);
         radioOff.setBounds(550, 430, 110, 21);
 
@@ -242,7 +247,7 @@ public class pnProduct extends javax.swing.JPanel {
         );
         jLabel11.setText("Mô tả sản phẩm");
         dialogProduct.getContentPane().add(jLabel11);
-        jLabel11.setBounds(180, 500, 107, 20);
+        jLabel11.setBounds(180, 500, 108, 20);
 
         txtDesc.setColumns(20);
         txtDesc.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -429,6 +434,11 @@ public class pnProduct extends javax.swing.JPanel {
         txtFind.setBounds(750, 10, 290, 40);
 
         btnFind.setText("Tìm Kiếm");
+        btnFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnFind);
         btnFind.setBounds(1050, 10, 100, 40);
 
@@ -465,11 +475,11 @@ public class pnProduct extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1192, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1192, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1192, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -729,6 +739,33 @@ public class pnProduct extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
+        String keyword = txtFind.getText().trim();
+        if(keyword.isEmpty()){
+            reloadData();
+        }else {
+            tbModel.setRowCount(0);
+            ProductDAO productDAO = new ProductDAO();
+            for(Product prod : productDAO.getSearchedProducts(keyword)){
+                tbModel.addRow(new Object[]{
+                    prod.getCodes(),
+                    prod.getName(),
+                    prod.getDesc(),
+                    prod.getCategoryName(),
+                    prod.getUnit(),
+                    prod.getStoreQuantity(),
+                    prod.getImportAvrg(),
+                    prod.getSellPrice(),
+                    prod.getState() == 2 ? "Đang kinh doanh" : "Tạm dừng bán"
+                });
+            }
+        }
+    }//GEN-LAST:event_btnFindActionPerformed
+
+    private void radioOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioOffActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radioOffActionPerformed
     
     public void reloadData(){
         tbModel = (DefaultTableModel)tbProducts.getModel();

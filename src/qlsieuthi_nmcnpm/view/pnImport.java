@@ -81,8 +81,8 @@ public class pnImport extends javax.swing.JPanel {
         btnSaveModify = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtFind = new javax.swing.JTextField();
+        btnFind = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtMaPhieu = new javax.swing.JTextField();
@@ -202,7 +202,12 @@ public class pnImport extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        jButton1.setText("Tìm kiếm");
+        btnFind.setText("Tìm kiếm");
+        btnFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -210,9 +215,9 @@ public class pnImport extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1)
+                .addComponent(txtFind)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnFind, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
@@ -220,8 +225,8 @@ public class pnImport extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                    .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFind, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -639,6 +644,30 @@ public class pnImport extends javax.swing.JPanel {
         
         initReceiptInfo();
     }//GEN-LAST:event_btnCreateReceiptActionPerformed
+
+    private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
+        String keyword = txtFind.getText().trim();
+        if(keyword.isEmpty()){
+            loadProductList();
+        }else {
+            tbModel.setRowCount(0);
+            ProductDAO productDAO = new ProductDAO();
+            for(Product prod : productDAO.getSearchedProducts(keyword)){
+                tbModel.addRow(new Object[]{
+                    prod.getCodes(),
+                    prod.getName(),
+                    
+                    prod.getUnit(),
+                    prod.getImportAvrg(),
+                    prod.getSellPrice(),
+                    prod.getStoreQuantity(),
+                    
+                    
+                   
+                });
+            }
+        }
+    }//GEN-LAST:event_btnFindActionPerformed
     public void initReceiptInfo(){
         ReceiptDAO rcDAO = new ReceiptDAO();
         txtMaPhieu.setText("PN" + String.format("%02d", rcDAO.getLatestID() + 1));
@@ -665,12 +694,12 @@ public class pnImport extends javax.swing.JPanel {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCreateReceipt;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnFind;
     private javax.swing.JButton btnModify;
     private javax.swing.JButton btnSaveModify;
     private javax.swing.JComboBox<Supplier> cbbSupplier;
     private com.toedter.calendar.JDateChooser dateImport;
     private javax.swing.JDialog dialogModify;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -689,11 +718,11 @@ public class pnImport extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JSpinner spinnerModify;
     private javax.swing.JSpinner spinnerQuan;
     private javax.swing.JTable tbProduct;
     private javax.swing.JTable tbReceipt;
+    private javax.swing.JTextField txtFind;
     private javax.swing.JTextField txtGiaNhap;
     private javax.swing.JTextField txtMaPhieu;
     private javax.swing.JTextField txtNguoiTao;

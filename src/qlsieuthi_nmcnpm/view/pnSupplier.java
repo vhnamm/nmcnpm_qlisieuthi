@@ -434,7 +434,7 @@ public class pnSupplier extends javax.swing.JPanel {
         
         boolean ok = suppDAO.addSupplier(supp);
         if(!ok){
-            JOptionPane.showMessageDialog(this, "Đã tồn tại nhà cung cấp này", "Hệ thống", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(dialogEditSupp, "Đã tồn tại nhà cung cấp này", "Hệ thống", JOptionPane.WARNING_MESSAGE);
             return;
         }
         txtCode.setText("");

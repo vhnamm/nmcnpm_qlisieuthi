@@ -363,7 +363,12 @@ public class ProductDAO {
         
         try {
             conn = ConnectDB.getInstance();
-            String sql = "SELECT codes, productName, unit, sellPrice, img FROM products WHERE productName LIKE ? ORDER BY ID ASC";
+            String sql = "SELECT prod.productName, prod.codes, prod.unit, prod.descriptions, prod.storeQuantity, prod.importAvrg, "
+                    + "prod.sellPrice, prod.state, prod.img,cat.categoryName "
+                    + "FROM products prod "
+                    + "INNER JOIN categories cat ON prod.categoryID = cat.ID "
+                    + "WHERE productName LIKE ? AND state <> 0 ORDER BY prod.ID ASC";
+            
             pre = conn.prepareStatement(sql);
             pre.setString(1, "%" + keyword + "%");
             rs = pre.executeQuery();
@@ -374,7 +379,11 @@ public class ProductDAO {
                 prod.setUnit(rs.getString("unit"));
                 prod.setSellPrice(rs.getDouble("sellPrice"));
                 prod.setImg(rs.getBytes("img"));
-                
+                prod.setDesc(rs.getString("descriptions"));
+                prod.setImportAvrg(rs.getDouble("importAvrg"));
+                prod.setCategoryName(rs.getString("categoryName"));
+                prod.setState(rs.getInt("state"));
+                prod.setStoreQuantity(rs.getInt("storeQuantity"));
                 list.add(prod);
             }
         } catch (SQLException e) {
