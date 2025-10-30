@@ -94,6 +94,8 @@ public class pnPendingOrder extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
+        setMinimumSize(new java.awt.Dimension(1398, 931));
+
         tabbedMain.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tabbedMain.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -398,11 +400,11 @@ public class pnPendingOrder extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedMain)
+            .addComponent(tabbedMain, javax.swing.GroupLayout.DEFAULT_SIZE, 1398, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedMain, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(tabbedMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 931, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -448,9 +450,6 @@ public class pnPendingOrder extends javax.swing.JPanel {
                 double total = SeperatorConvert.thousandFormattedToDouble(lbTotal.getText());
                 int earnedPoint = (int) Math.round((total * 0.04) / 1000);
                 customerDAO.updatePoint(customerID, earnedPoint + currentPoint);
-            }else{// khach su dung diem
-                int usedPoint = (int) (discount / 1000);
-                customerDAO.updatePoint(customerID, currentPoint - usedPoint);
             }
             
             JOptionPane.showMessageDialog(this, "Xác nhận đơn hàng thành công, vui lòng kiểm tra trong đơn đã xác nhận", "Hệ thống", JOptionPane.INFORMATION_MESSAGE);

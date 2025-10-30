@@ -605,8 +605,8 @@ public class pnImport extends javax.swing.JPanel {
         LocalDate lcDate = LocalDate.ofInstant(dateImport.getDate().toInstant(), ZoneId.systemDefault());
         String maNguoiTao = txtNguoiTao.getText();
         //lay ID quan ly tu maQL
-        ManagerDAO mngDAO = new ManagerDAO();
-        int idQL = mngDAO.getIDByCode(maNguoiTao);
+        
+        int idQL = Integer.parseInt(maNguoiTao.substring(2));
         int idNCC = ((Supplier)cbbSupplier.getSelectedItem()).getId();
         
         double total = SeperatorConvert.thousandFormattedToDouble(txtTotal.getText());

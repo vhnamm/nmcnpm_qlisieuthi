@@ -1157,7 +1157,7 @@ public class pnSell extends javax.swing.JPanel {
     
     public void loadProductData(){
         ProductDAO prodDAO = new ProductDAO();
-        list = prodDAO.getAllProducts();
+        list = prodDAO.getAllOrderableProducts();
         
         tbProductModel.setRowCount(0);
         for(Product prod : list){

@@ -11,7 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.text.html.HTML;
 import qlsieuthi_nmcnpm.DAO.CategoryDAO;
 import qlsieuthi_nmcnpm.DAO.CustomerDAO;
 import qlsieuthi_nmcnpm.DAO.OrderDAO;
@@ -854,7 +853,10 @@ public class pnCustomerOrder extends javax.swing.JPanel {
             odtDAO.addOrderDetail(orderDetail);
             
         }
-        
+        if(usedPoint > 0){
+            CustomerDAO customerDAO = new CustomerDAO();
+            customerDAO.updatePoint(customerID, Integer.parseInt(txtPoint.getText()) - usedPoint);
+        }
         
         JOptionPane.showMessageDialog(this, "Dat hang thanh cong");
         clearUI();
