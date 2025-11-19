@@ -116,6 +116,7 @@ public class pnProduct extends javax.swing.JPanel {
 
         dialogProduct.setMinimumSize(new java.awt.Dimension(1187, 719));
         dialogProduct.setModal(true);
+        dialogProduct.setResizable(false);
         dialogProduct.getContentPane().setLayout(null);
 
         jPanel2.setBackground(new Color(61, 74, 89));
@@ -247,7 +248,7 @@ public class pnProduct extends javax.swing.JPanel {
         );
         jLabel11.setText("Mô tả sản phẩm");
         dialogProduct.getContentPane().add(jLabel11);
-        jLabel11.setBounds(180, 500, 108, 20);
+        jLabel11.setBounds(180, 500, 107, 20);
 
         txtDesc.setColumns(20);
         txtDesc.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -611,6 +612,7 @@ public class pnProduct extends javax.swing.JPanel {
             }
             byte[] prodImgBytes = ImageConvert.getImageToByte(prodImgIcon);
             int categoryID = ((Category)cbbCate.getSelectedItem()).getId();
+            
             Product prod = new Product(name, unit, categoryID, desc, 0, 0, sellPrice, 2, prodImgBytes); // sửa thành lấy data từ Combobox Category
             ProductDAO prodDAO = new ProductDAO();
             boolean ok = prodDAO.addProduct(prod);
@@ -736,10 +738,6 @@ public class pnProduct extends javax.swing.JPanel {
         txtCategory.setText("");
     }//GEN-LAST:event_btnSaveCateActionPerformed
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSaveActionPerformed
-
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         String keyword = txtFind.getText().trim();
         if(keyword.isEmpty()){
@@ -766,6 +764,10 @@ public class pnProduct extends javax.swing.JPanel {
     private void radioOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioOffActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioOffActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveActionPerformed
     
     public void reloadData(){
         tbModel = (DefaultTableModel)tbProducts.getModel();

@@ -615,7 +615,7 @@ public class pnImport extends javax.swing.JPanel {
         //insert vao bang Receipt
         Receipt rc  = new Receipt(receiptCode, idQL, idNCC, lcDate, total);
         ReceiptDAO rcDAO = new ReceiptDAO();
-        int receiptGeneratedID = rcDAO.addReceipt(rc);
+        int receiptGeneratedID = rcDAO.addReceipt(rc);  
         
         //Insert vao bang trung gian Receipt_Product
         for(int i=0; i<tbReceiptModel.getRowCount(); i++){

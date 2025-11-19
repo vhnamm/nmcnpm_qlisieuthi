@@ -265,7 +265,7 @@ public class pnQLNhanVien extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        try {
+            try {
             String name = txtName.getText().trim();
             String tel = txtTel.getText().trim();
             String dob = txtDOB.getText().trim();

@@ -49,7 +49,7 @@ public class NhanVienDAO {
                     e.printStackTrace();
                 }
             }
-            ConnectDB.close(conn);
+            ConnectDB.close(conn);  
             pre.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -166,8 +166,7 @@ public class NhanVienDAO {
                     + "FROM employees nv "
                     + "INNER JOIN users nd "
                     + "ON nv.userID = nd.ID "
-                    + "INNER JOIN accounts acc ON acc.userID = nd.ID "
-                    + "WHERE acc.isActive = true";
+                    + "WHERE nv.trangThai = true";
             
             pre = conn.prepareStatement(sql);
             rs = pre.executeQuery();

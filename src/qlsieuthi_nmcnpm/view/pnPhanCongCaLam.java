@@ -264,14 +264,16 @@ public class pnPhanCongCaLam extends javax.swing.JPanel {
                 
                 int shiftID = -1;
                 LocalDate ngayLam;
-
+                
+                PhieuPhanCongDAO phieuDAO = new PhieuPhanCongDAO();
+                
                 for(int row = 0; row < tbPhieuModel.getRowCount(); row++){
                     int empID = Integer.parseInt(tbPhieuModel.getValueAt(row, 0).toString().substring(2));
                     shiftID = Integer.parseInt(tbPhieuModel.getValueAt(row, 5).toString());
                     ngayLam = (LocalDate) tbPhieuModel.getValueAt(row, 3);
 
                     PhieuPhanCong phieu = new PhieuPhanCong(ngayLam, empID, shiftID);
-                    PhieuPhanCongDAO phieuDAO = new PhieuPhanCongDAO();
+                    
 
                     boolean ok = phieuDAO.addAssignment(phieu);
                     if(!ok){
@@ -300,9 +302,7 @@ public class pnPhanCongCaLam extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    public void reloadPhanCongData(){
-        jLabel1.setText("reload");
-    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnTaoLich;

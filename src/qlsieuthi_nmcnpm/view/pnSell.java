@@ -900,7 +900,8 @@ public class pnSell extends javax.swing.JPanel {
                 double chietKhau = SeperatorConvert.thousandFormattedToDouble(lbSale.getText());
                 int usedPoint = (int) (chietKhau / 1000);
                 double finalTotal = SeperatorConvert.thousandFormattedToDouble(lbTotalAfterSale.getText());
-
+                
+                //goi cac DAO
                 Order order = new Order(employeeID, customerID, codes, address, createdAt, total, customerPaid, chietKhau, finalTotal, state);
                 OrderDAO orderDAO = new OrderDAO();
                 orderDAO.addOrder(order);

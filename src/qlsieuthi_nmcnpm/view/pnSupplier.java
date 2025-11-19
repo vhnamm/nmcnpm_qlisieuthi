@@ -457,7 +457,7 @@ public class pnSupplier extends javax.swing.JPanel {
            supplierDAO.deleteSupplier(supplierID);
            reloadData();
            JOptionPane.showMessageDialog(this, "Xóa nhà cung cấp thành công");
-       }
+       }        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
