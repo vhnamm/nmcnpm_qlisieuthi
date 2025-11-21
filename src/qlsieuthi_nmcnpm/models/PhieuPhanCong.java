@@ -14,11 +14,13 @@ public class PhieuPhanCong {
     private LocalDate date;
     private int nhanVienID;
     private int caLamID;
-
-    public PhieuPhanCong(LocalDate date, int nhanVienID, int caLamID) {
+    private double luongDuKien;
+    
+    public PhieuPhanCong(LocalDate date, int nhanVienID, int caLamID, double luongDuKien) {
         this.date = date;
         this.nhanVienID = nhanVienID;
         this.caLamID = caLamID;
+        this.luongDuKien = luongDuKien;
     }
 
     public PhieuPhanCong() {
@@ -46,6 +48,14 @@ public class PhieuPhanCong {
 
     public void setCaLamID(int caLamID) {
         this.caLamID = caLamID;
+    }
+
+    public double getLuongDuKien() {
+        return luongDuKien;
+    }
+
+    public void setLuongDuKien(double luongDuKien) {
+        this.luongDuKien = luongDuKien;
     }
     
     

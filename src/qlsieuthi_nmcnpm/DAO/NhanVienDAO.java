@@ -162,7 +162,7 @@ public class NhanVienDAO {
         
         try {
             conn = ConnectDB.getInstance();
-            String sql = "SELECT nv.maNV, nv.trangThai,nd.hoTen, nd.tel "
+            String sql = "SELECT nv.maNV, nv.trangThai,nd.hoTen, nd.tel, nv.salary "
                     + "FROM employees nv "
                     + "INNER JOIN users nd "
                     + "ON nv.userID = nd.ID "
@@ -177,7 +177,7 @@ public class NhanVienDAO {
                 nv.setHoTen(rs.getString("hoTen"));
                 nv.setTrangThai(rs.getInt("trangThai"));
                 nv.setTel(rs.getString("tel"));
-                
+                nv.setSalary(rs.getDouble("salary"));
                 list.add(nv);
             }
             ConnectDB.close(conn);

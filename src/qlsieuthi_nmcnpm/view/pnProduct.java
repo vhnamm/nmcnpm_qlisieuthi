@@ -613,7 +613,7 @@ public class pnProduct extends javax.swing.JPanel {
             byte[] prodImgBytes = ImageConvert.getImageToByte(prodImgIcon);
             int categoryID = ((Category)cbbCate.getSelectedItem()).getId();
             
-            Product prod = new Product(name, unit, categoryID, desc, 0, 0, sellPrice, 2, prodImgBytes); // sửa thành lấy data từ Combobox Category
+            Product prod = new Product(name, unit, categoryID, desc, 0, 0, sellPrice, 2, prodImgBytes); 
             ProductDAO prodDAO = new ProductDAO();
             boolean ok = prodDAO.addProduct(prod);
             

@@ -35,6 +35,7 @@ public class pnPhanCongCaLam extends javax.swing.JPanel {
                nv.getMaNV(),
                nv.getHoTen(),
                nv.getTel(),
+               nv.getSalary(),
                "Đang làm"
            });
        }
@@ -91,15 +92,24 @@ public class pnPhanCongCaLam extends javax.swing.JPanel {
 
         tbNV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã NV", "Họ Tên", "SĐT", "Trạng thái"
+                "Mã NV", "Họ Tên", "SĐT", "Lương cơ bản", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbNV.setRowHeight(30);
         jScrollPane1.setViewportView(tbNV);
 
         btnTaoLich.setText("Tạo lịch");
@@ -138,9 +148,18 @@ public class pnPhanCongCaLam extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã NV", "Tên nhân viên", "Số điện thoại", "Ngày", "Ca", "Mã ca"
+                "Mã NV", "Tên nhân viên", "Số điện thoại", "Ngày", "Ca", "Mã ca", "Dự kiến nhận"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblPhieu.setRowHeight(30);
         jScrollPane2.setViewportView(tblPhieu);
 
         btnTaoPhieu.setBackground(new java.awt.Color(0, 172, 64));
@@ -228,7 +247,7 @@ public class pnPhanCongCaLam extends javax.swing.JPanel {
             String maNV = tbNV.getValueAt(selectedRow, 0).toString();
             String name =  tbNV.getValueAt(selectedRow, 1).toString();
             String tel = tbNV.getValueAt(selectedRow, 2).toString();
-            
+            double duKienNhan = Double.parseDouble(tbNV.getValueAt(selectedRow, 3).toString()) * 5;
             
             tbPhieuModel = (DefaultTableModel) tblPhieu.getModel();
             
@@ -245,7 +264,8 @@ public class pnPhanCongCaLam extends javax.swing.JPanel {
                 tel,
                 lcSelectedDate,
                 tenCa,
-                maCa
+                maCa,
+                duKienNhan
             });
             tblPhieu.setModel(tbPhieuModel);
         } catch (NullPointerException nfe) {
@@ -264,15 +284,16 @@ public class pnPhanCongCaLam extends javax.swing.JPanel {
                 
                 int shiftID = -1;
                 LocalDate ngayLam;
-                
+                double duKienNhan;
                 PhieuPhanCongDAO phieuDAO = new PhieuPhanCongDAO();
                 
                 for(int row = 0; row < tbPhieuModel.getRowCount(); row++){
                     int empID = Integer.parseInt(tbPhieuModel.getValueAt(row, 0).toString().substring(2));
                     shiftID = Integer.parseInt(tbPhieuModel.getValueAt(row, 5).toString());
                     ngayLam = (LocalDate) tbPhieuModel.getValueAt(row, 3);
-
-                    PhieuPhanCong phieu = new PhieuPhanCong(ngayLam, empID, shiftID);
+                    duKienNhan = Double.parseDouble(tbPhieuModel.getValueAt(row, 6).toString());
+                    
+                    PhieuPhanCong phieu = new PhieuPhanCong(ngayLam, empID, shiftID, duKienNhan);
                     
 
                     boolean ok = phieuDAO.addAssignment(phieu);
